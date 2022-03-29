@@ -7,7 +7,7 @@ The App retrieves the clients First name, Last Name and the requried Alias from 
 All the Classes inherits one or more properties from its parent, If any information is changed, the Save button will be active and the user will have the option to
 up date the dataBase, save, and Store it for future use. 
 
-The First and Last name has a limit of 50 characters, if there are more thasn 50 characters, the app will inform the user of the error. the First name is always required.
+The First and Last name has a limit of 50 characters, if there are more than 50 characters, the app will inform the user of the error. the First name is always required.
 
 If the user makes a change to the clients info and doesn't save it, (by navagating to a different client on the right navagation view) a pop box will inform the user of 
 the potential loss. If the info isn't Saved, there is no change in the DataBase, if there is a Save, the Navagation view on the right will update and will be saved to the
