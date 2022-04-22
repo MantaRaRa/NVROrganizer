@@ -4,3 +4,15 @@ C:\Users\vvanmany\Desktop\Repos\NVRDataBase\NvrOrganizer.Model\obj\Debug\NvrOrga
 C:\Users\vvanmany\Desktop\Repos\NVRDataBase\NvrOrganizer.Model\obj\Debug\NvrOrganizer.Model.csproj.CoreCompileInputs.cache
 C:\Users\vvanmany\Desktop\Repos\NVRDataBase\NvrOrganizer.Model\obj\Debug\NvrOrganizer.Model.dll
 C:\Users\vvanmany\Desktop\Repos\NVRDataBase\NvrOrganizer.Model\obj\Debug\NvrOrganizer.Model.pdb
+C:\Users\Crescendo\Desktop\Repo\NVROrganizer\NvrOrganizer.Model\bin\Debug\NvrOrganizer.Model.dll
+C:\Users\Crescendo\Desktop\Repo\NVROrganizer\NvrOrganizer.Model\bin\Debug\NvrOrganizer.Model.pdb
+C:\Users\Crescendo\Desktop\Repo\NVROrganizer\NvrOrganizer.Model\obj\Debug\NvrOrganizer.Model.csproj.AssemblyReference.cache
+C:\Users\Crescendo\Desktop\Repo\NVROrganizer\NvrOrganizer.Model\obj\Debug\NvrOrganizer.Model.csproj.CoreCompileInputs.cache
+C:\Users\Crescendo\Desktop\Repo\NVROrganizer\NvrOrganizer.Model\obj\Debug\NvrOrganizer.Model.dll
+C:\Users\Crescendo\Desktop\Repo\NVROrganizer\NvrOrganizer.Model\obj\Debug\NvrOrganizer.Model.pdb
+C:\Users\berry\Desktop\Repo\NVROrganizer\NvrOrganizer.Model\bin\Debug\NvrOrganizer.Model.dll
+C:\Users\berry\Desktop\Repo\NVROrganizer\NvrOrganizer.Model\bin\Debug\NvrOrganizer.Model.pdb
+C:\Users\berry\Desktop\Repo\NVROrganizer\NvrOrganizer.Model\obj\Debug\NvrOrganizer.Model.csproj.AssemblyReference.cache
+C:\Users\berry\Desktop\Repo\NVROrganizer\NvrOrganizer.Model\obj\Debug\NvrOrganizer.Model.csproj.CoreCompileInputs.cache
+C:\Users\berry\Desktop\Repo\NVROrganizer\NvrOrganizer.Model\obj\Debug\NvrOrganizer.Model.dll
+C:\Users\berry\Desktop\Repo\NVROrganizer\NvrOrganizer.Model\obj\Debug\NvrOrganizer.Model.pdb

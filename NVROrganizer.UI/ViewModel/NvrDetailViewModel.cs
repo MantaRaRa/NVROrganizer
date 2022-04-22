@@ -8,6 +8,9 @@ using System.Windows.Input;
 using Prism.Commands;
 using NvrOrganizer.UI.Wrapper;
 using NvrOrganizer.UI.Data.Repositories;
+using NvrOrganizer.UI.View.Services;
+using NvrOrganizer.UI.Data.Lookups;
+using System.Collections.ObjectModel;
 
 namespace NvrOrganizer.UI.ViewModel
 {
@@ -15,43 +18,70 @@ namespace NvrOrganizer.UI.ViewModel
     {
         private INvrRepository _nvrRepository;
         private IEventAggregator _eventAggregator;
+        private IMessageDialogService _messageDialogService;
+        private IProgrammingLanguageLookupDataService _programmingLanguageLookupDataService;
         private NvrWrapper _nvr;
         private bool _hasChanges;
 
         public NvrDetailViewModel(INvrRepository nvrRepository, 
-            IEventAggregator eventAggregator)
+            IEventAggregator eventAggregator,
+            IMessageDialogService messageDialogService,
+            IProgrammingLanguageLookupDataService programmingLanguageLookupDataService)
         {
             _nvrRepository = nvrRepository;
             _eventAggregator = eventAggregator;
-           
+            _messageDialogService = messageDialogService;
+            _programmingLanguageLookupDataService = programmingLanguageLookupDataService;
+
 
             SaveCommand = new DelegateCommand(OnSaveExecute, OnSaveCanExecute);
             DeleteCommand = new DelegateCommand(OnDeleteExecute);
+
+            ProgrammingLanguages = new ObservableCollection<LookupItem>();
          }
 
         public async Task LoadAsync(int? nvrId)
         {
-            var nvr =  nvrId.HasValue
+            var nvr = nvrId.HasValue
                ? await _nvrRepository.GetByIdAsync(nvrId.Value)
                : CreateNewNvr();
 
+            InitializeNvr(nvr);
+
+            await LoadProgrammingLanguagesLookupAsync();
+
+        }
+
+        private void InitializeNvr(Nvr nvr)
+        {
             Nvr = new NvrWrapper(nvr);
             Nvr.PropertyChanged += (s, e) =>
-              {
-                  if (!HasChanges)
-                  {
-                      HasChanges = _nvrRepository.HasChanges();
-                  }
-                  if(e.PropertyName == nameof(Nvr.HasErrors))
-                  {
-                      ((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
-                  }
-              };
+            {
+                if (!HasChanges)
+                {
+                    HasChanges = _nvrRepository.HasChanges();
+                }
+                if (e.PropertyName == nameof(Nvr.HasErrors))
+                {
+                    ((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
+                }
+            };
             ((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
             if (Nvr.Id == 0)
             {
                 //Little trick to trigger the validation
                 Nvr.FirstName = "";
+            }
+        }
+
+        private async Task LoadProgrammingLanguagesLookupAsync()
+        {
+            ProgrammingLanguages.Clear();
+            ProgrammingLanguages.Add(new NullLookupItem { DisplayMember = "-"});
+            var lookup = await _programmingLanguageLookupDataService.GetProgrammingLanguageLookupAsync();
+            foreach (var lookupItem in lookup)
+            {
+                ProgrammingLanguages.Add(lookupItem);
             }
         }
 
@@ -84,7 +114,7 @@ namespace NvrOrganizer.UI.ViewModel
         public ICommand SaveCommand { get; }
 
         public ICommand DeleteCommand { get; }
-
+        public ObservableCollection<LookupItem> ProgrammingLanguages { get; }
 
         private async void OnSaveExecute()
         {
@@ -105,11 +135,14 @@ namespace NvrOrganizer.UI.ViewModel
 
         private async void OnDeleteExecute()
         {
+            var result = _messageDialogService.ShowOKCancelDialog($"Do you really want to delete the selected nvr {Nvr.FirstName} {Nvr.LastName}?",
+               "Question");
+            if(result == MessageDialogResult.OK) { 
             _nvrRepository.Remove(Nvr.Model);
            await _nvrRepository.SaveAsync();
             _eventAggregator.GetEvent<AfterNvrDeleteEvent>().Publish(Nvr.Id);
         }
-
+        }
         private Nvr CreateNewNvr()
         {
            var nvr = new Nvr();

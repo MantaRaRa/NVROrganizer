@@ -15,5 +15,8 @@ namespace NvrOrganizer.Model
        
         [StringLength(50)]
         public string NvrInfo { get; set; }
+
+        public int? FavoriteLanguageId { get; set; }
+        public ProgrammingLanguage FavoriteLanguage { get; set; }
     }
 }

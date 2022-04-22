@@ -51,9 +51,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\202202270414430_InitialDatabase.cs" />
-    <Compile Include="Migrations\202202270414430_InitialDatabase.designer.cs">
-      <DependentUpon>202202270414430_InitialDatabase.cs</DependentUpon>
+    <Compile Include="Migrations\202203221347520_InitialDatabase.cs" />
+    <Compile Include="Migrations\202203221347520_InitialDatabase.designer.cs">
+      <DependentUpon>202203221347520_InitialDatabase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202203240202411_AddedProgrammingLanguage.cs" />
+    <Compile Include="Migrations\202203240202411_AddedProgrammingLanguage.designer.cs">
+      <DependentUpon>202203240202411_AddedProgrammingLanguage.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="NvrOrganizerDbContext.cs" />
@@ -70,8 +74,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202202270414430_InitialDatabase.resx">
-      <DependentUpon>202202270414430_InitialDatabase.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202203221347520_InitialDatabase.resx">
+      <DependentUpon>202203221347520_InitialDatabase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202203240202411_AddedProgrammingLanguage.resx">
+      <DependentUpon>202203240202411_AddedProgrammingLanguage.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

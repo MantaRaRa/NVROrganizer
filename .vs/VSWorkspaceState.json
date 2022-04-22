@@ -1,6 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\NVROrganizer.DataAccess",
+    "\\NVROrganizer.UI"
   ],
+  "SelectedNode": "\\NVROrganizer.UI\\App.xaml",
   "PreviewInSolutionExplorer": false
 }

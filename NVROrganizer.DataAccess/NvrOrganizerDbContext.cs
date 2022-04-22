@@ -12,6 +12,8 @@ namespace NvrOrganizer.DataAccess
         }
         public DbSet<Nvr> Nvrs { get; set; }
 
+        public DbSet<ProgrammingLanguage> ProgrammingLanguages { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

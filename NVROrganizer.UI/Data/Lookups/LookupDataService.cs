@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace NvrOrganizer.UI.Data.Lookups
 {
-    public class LookupDataService : INvrLookupDataService
+    public class LookupDataService : INvrLookupDataService, IProgrammingLanguageLookupDataService
     {
         private Func<NvrOrganizerDbContext> _contextCreator;
 
@@ -22,11 +22,26 @@ namespace NvrOrganizer.UI.Data.Lookups
             using (var ctx = _contextCreator())
             {
                 return await ctx.Nvrs.AsNoTracking()
-                    .Select(n=>
+                    .Select(n =>
                     new LookupItem
                     {
                         Id = n.Id,
                         DisplayMember = n.FirstName + " " + n.LastName
+                    })
+                    .ToListAsync();
+            }
+        }
+
+        public async Task<IEnumerable<LookupItem>> GetProgrammingLanguageLookupAsync()
+        {
+            using (var ctx = _contextCreator())
+            {
+                return await ctx.ProgrammingLanguages.AsNoTracking()
+                    .Select(n =>
+                    new LookupItem
+                    {
+                        Id = n.Id,
+                        DisplayMember = n.Name
                     })
                     .ToListAsync();
             }
