@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="LookupItem.cs" />
     <Compile Include="Nvr.cs" />
+    <Compile Include="NvrPhoneNumber.cs" />
     <Compile Include="ProgrammingLanguage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -26,7 +26,9 @@ namespace NvrOrganizer.UI.Data.Repositories
 
         public async Task<Nvr> GetByIdAsync(int nvrId)
         {
-            return await _context.Nvrs.SingleAsync(n => n.Id == nvrId);
+            return await _context.Nvrs
+                .Include(n => n.PhoneNumbers)
+                .SingleAsync(n => n.Id == nvrId);
         }
 
         public bool HasChanges()
@@ -37,6 +39,11 @@ namespace NvrOrganizer.UI.Data.Repositories
         public void Remove(Nvr model)
         {
             _context.Nvrs.Remove(model);
+        }
+
+        public void RemovePhoneNumber(NvrPhoneNumber model)
+        {
+            _context.NvrPhoneNumbers.Remove(model);
         }
 
         public async Task SaveAsync()

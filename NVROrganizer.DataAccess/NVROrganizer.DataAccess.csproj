@@ -59,6 +59,10 @@
     <Compile Include="Migrations\202203240202411_AddedProgrammingLanguage.designer.cs">
       <DependentUpon>202203240202411_AddedProgrammingLanguage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202204230204159_AddedNvrPhoneNumbers.cs" />
+    <Compile Include="Migrations\202204230204159_AddedNvrPhoneNumbers.designer.cs">
+      <DependentUpon>202204230204159_AddedNvrPhoneNumbers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="NvrOrganizerDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -79,6 +83,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202203240202411_AddedProgrammingLanguage.resx">
       <DependentUpon>202203240202411_AddedProgrammingLanguage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202204230204159_AddedNvrPhoneNumbers.resx">
+      <DependentUpon>202204230204159_AddedNvrPhoneNumbers.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

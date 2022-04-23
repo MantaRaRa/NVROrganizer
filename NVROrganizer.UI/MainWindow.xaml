@@ -7,7 +7,9 @@
         xmlns:view="clr-namespace:NvrOrganizer.UI.View" 
         xmlns:viewModel="clr-namespace:NvrOrganizer.UI.ViewModel"
         mc:Ignorable="d"
-        Title="NVR Organizer" Height="450" Width="800" FontSize="20">
+        Title="NVR Organizer" Height="700" Width="1000" 
+        WindowStartupLocation="CenterScreen"
+        FontSize="20">
     <Window.Resources>
         <DataTemplate DataType="{x:Type viewModel:NvrDetailViewModel}">
             <view:NvrDetailView/>

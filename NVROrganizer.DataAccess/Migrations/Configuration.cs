@@ -33,6 +33,11 @@ namespace NvrOrganizer.DataAccess.Migrations
            new ProgrammingLanguage { Name = "Milestone" }
            );
 
+            context.SaveChanges();
+
+            context.NvrPhoneNumbers.AddOrUpdate(pn => pn.Number,
+                new NvrPhoneNumber { Number = "(859) 123-4567", NvrId = context.Nvrs.First().Id });
+
         }
     }
 }

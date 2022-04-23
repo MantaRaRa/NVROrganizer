@@ -11,5 +11,6 @@ namespace NvrOrganizer.UI.Data.Repositories
         bool HasChanges();
         void Add(Nvr nvr);
         void Remove(Nvr model);
+        void RemovePhoneNumber(NvrPhoneNumber model);
     }
 }

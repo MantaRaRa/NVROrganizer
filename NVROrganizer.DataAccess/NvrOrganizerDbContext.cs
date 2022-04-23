@@ -1,5 +1,6 @@
 ﻿using NvrOrganizer.Model;
 using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration;
 using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace NvrOrganizer.DataAccess
@@ -13,6 +14,8 @@ namespace NvrOrganizer.DataAccess
         public DbSet<Nvr> Nvrs { get; set; }
 
         public DbSet<ProgrammingLanguage> ProgrammingLanguages { get; set; }
+
+        public DbSet<NvrPhoneNumber> NvrPhoneNumbers { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
