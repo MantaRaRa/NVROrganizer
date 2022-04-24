@@ -13,17 +13,18 @@ namespace NvrOrganizer.UI.ViewModel
     public class NavigationItemViewModel : ViewModelBase
     {
         private string _displayMember;
+        private IEventAggregator _eventAggregator;
 
         public NavigationItemViewModel(int id, string displayMember,
+            string detailViewModelName,
             IEventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
             Id = id;
             DisplayMember = displayMember;
-            OpenNvrDetailViewCommand = new DelegateCommand(OnOpenNvrDetailView);
+            _detailViewModelName = detailViewModelName;
+            OpenDetailViewCommand = new DelegateCommand(OnOpenDetailViewExecute);
         }
-
-        private IEventAggregator _eventAggregator;
 
         public int Id { get; }
 
@@ -38,12 +39,19 @@ namespace NvrOrganizer.UI.ViewModel
             }
         }
 
-        public ICommand OpenNvrDetailViewCommand { get; }
+        private string _detailViewModelName;
 
-        private void OnOpenNvrDetailView()
+        public ICommand OpenDetailViewCommand { get; }
+
+        private void OnOpenDetailViewExecute()
         {
-            _eventAggregator.GetEvent<OpenNvrDetailViewEvent>()
-                       .Publish(Id);
+            _eventAggregator.GetEvent<OpenDetailViewEvent>()
+                       .Publish(
+                new OpenDetailViewEventArgs
+                {
+                    Id = Id,
+                    ViewModelName = _detailViewModelName,
+                });
         }
 
     }

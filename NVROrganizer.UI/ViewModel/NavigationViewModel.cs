@@ -21,8 +21,8 @@ namespace NvrOrganizer.UI.ViewModel
             _nvrLookupService = nvrLookupService;
             _eventAggregator = eventAggregator;
             Nvrs = new ObservableCollection<NavigationItemViewModel>();
-            _eventAggregator.GetEvent<AfterNvrSavedEvent>().Subscribe(AfterNvrSaved);
-            _eventAggregator.GetEvent<AfterNvrDeleteEvent>().Subscribe(AfterNvrDeleted);
+            _eventAggregator.GetEvent<AfterDetailSavedEvent>().Subscribe(AfterDetailSaved);
+            _eventAggregator.GetEvent<AfterDetailDeletedEvent>().Subscribe(AfterDetailDeleted);
 
         }
        
@@ -33,31 +33,44 @@ namespace NvrOrganizer.UI.ViewModel
             foreach (var item in lookup)
             {
                 Nvrs.Add(new NavigationItemViewModel(item.Id,item.DisplayMember,
+                    nameof(NvrDetailViewModel),
                     _eventAggregator));
             }
         }
         public ObservableCollection<NavigationItemViewModel> Nvrs { get; }
 
-        private void AfterNvrDeleted(int nvrId)
+        private void AfterDetailDeleted(AfterDetailDeletedEventArgs args)
         {
-            var nvr = Nvrs.SingleOrDefault(n => n.Id == nvrId);
-            if (nvr != null)
+            switch (args.ViewModelName)
             {
-                Nvrs.Remove(nvr);
+                case nameof(NvrDetailViewModel):
+                    var nvr = Nvrs.SingleOrDefault(n => n.Id == args.Id);
+                    if (nvr != null)
+                    {
+                        Nvrs.Remove(nvr);
+                    }
+                    break;
             }
+
         }
 
-        private void AfterNvrSaved(AfterNvrSavedEventArgs obj)
+        private void AfterDetailSaved(AfterDetailSavedEventArgs obj)
         {
-            var lookupItem = Nvrs.SingleOrDefault(l => l.Id == obj.Id);
-            if (lookupItem == null)
+            switch (obj.ViewModelName)
             {
-                Nvrs.Add(new NavigationItemViewModel(obj.Id, obj.DisplayMember,
-                    _eventAggregator));
-            }
-            else
-            {
-                lookupItem.DisplayMember = obj.DisplayMember;
+                case nameof(NvrDetailViewModel):
+                    var lookupItem = Nvrs.SingleOrDefault(l => l.Id == obj.Id);
+                    if (lookupItem == null)
+                    {
+                        Nvrs.Add(new NavigationItemViewModel(obj.Id, obj.DisplayMember,
+                            nameof(NvrDetailViewModel),
+                            _eventAggregator));
+                    }
+                    else
+                    {
+                        lookupItem.DisplayMember = obj.DisplayMember;
+                    }
+                    break;
             }
 
         }

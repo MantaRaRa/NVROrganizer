@@ -1,10 +1,7 @@
-﻿using System.Threading.Tasks;
-
-namespace NvrOrganizer.UI.ViewModel
+﻿namespace NvrOrganizer.UI.ViewModel
 {
-    public interface INvrDetailViewModel
+    public interface INvrDetailViewModel : IDetailViewModel
     {
-        Task LoadAsync(int? nvrId);
-        bool HasChanges { get; }
+      
     }
 }

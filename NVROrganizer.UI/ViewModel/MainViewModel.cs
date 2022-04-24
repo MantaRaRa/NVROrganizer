@@ -13,7 +13,7 @@ namespace NvrOrganizer.UI.ViewModel
         private IEventAggregator _eventAggregator;
         private Func<INvrDetailViewModel> _nvrDetailViewModelCreator;
         private IMessageDialogService _messageDialogService;
-        private INvrDetailViewModel _nvrDetailViewModel;
+        private IDetailViewModel _detailViewModel;
 
         public MainViewModel(INavigationViewModel navigationViewModel,
             Func<INvrDetailViewModel> nvrDetailViewModelCreator,
@@ -24,12 +24,12 @@ namespace NvrOrganizer.UI.ViewModel
             _nvrDetailViewModelCreator = nvrDetailViewModelCreator;
             _messageDialogService = messageDialogService;
 
-            _eventAggregator.GetEvent<OpenNvrDetailViewEvent>()
-               .Subscribe(OnOpenNvrDetailView);
-            _eventAggregator.GetEvent<AfterNvrDeleteEvent>()
-                .Subscribe(AfterNvrDeleted);
+            _eventAggregator.GetEvent<OpenDetailViewEvent>()
+               .Subscribe(OnOpenDetailView);
+            _eventAggregator.GetEvent<AfterDetailDeletedEvent>()
+                .Subscribe(AfterDetailDeleted);
 
-            CreateNewNvrCommand = new DelegateCommand(OnCreateNewNvrExecute);
+            CreateNewDetailCommand = new DelegateCommand<Type>(OnCreateNewDetailExecute);
 
             NavigationViewModel = navigationViewModel;
         }
@@ -38,24 +38,24 @@ namespace NvrOrganizer.UI.ViewModel
         {
             await NavigationViewModel.LoadAsync();
         }
-        public ICommand CreateNewNvrCommand { get; }
+        public ICommand CreateNewDetailCommand { get; }
                 
         public INavigationViewModel NavigationViewModel { get; }
                 
-        public INvrDetailViewModel NvrDetailViewModel
+        public IDetailViewModel DetailViewModel
         {
-            get { return _nvrDetailViewModel; }
+            get { return _detailViewModel; }
             private set 
             { 
-                _nvrDetailViewModel = value;
+                _detailViewModel = value;
                 OnPropertyChanged();
             }
         }
 
 
-        private async void OnOpenNvrDetailView(int? nvrId)
+        private async void OnOpenDetailView(OpenDetailViewEventArgs args)
         {
-            if(NvrDetailViewModel!=null && NvrDetailViewModel.HasChanges)
+            if(DetailViewModel!=null && DetailViewModel.HasChanges)
             {
                 var result = _messageDialogService.ShowOKCancelDialog("Changes have not been Saved, Navigate away?", "Warning");
                    
@@ -64,18 +64,27 @@ namespace NvrOrganizer.UI.ViewModel
                   return;
                 }
             }
-            NvrDetailViewModel=_nvrDetailViewModelCreator();
-            await NvrDetailViewModel.LoadAsync(nvrId);
+
+            switch (args.ViewModelName)
+            {
+                case nameof(NvrDetailViewModel):
+                    DetailViewModel = _nvrDetailViewModelCreator();
+                    break;
+            }
+
+           
+            await DetailViewModel.LoadAsync(args.Id);
         }
 
-        private void OnCreateNewNvrExecute()
+        private void OnCreateNewDetailExecute(Type viewModelType)
         {
-            OnOpenNvrDetailView(null);
+            OnOpenDetailView(
+                new OpenDetailViewEventArgs { ViewModelName = viewModelType.Name});
         }
 
-        private void AfterNvrDeleted(int nvrId)
+        private void AfterDetailDeleted(AfterDetailDeletedEventArgs args)
         {
-           NvrDetailViewModel = null;
+           DetailViewModel = null;
         }
 
     }

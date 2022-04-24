@@ -127,15 +127,19 @@
     <Compile Include="Data\Lookups\INvrLookupDataService.cs" />
     <Compile Include="Data\Lookups\IProgrammingLanguageLookupDataService.cs" />
     <Compile Include="Data\Lookups\LookupDataService.cs" />
-    <Compile Include="Event\AfterNvrDeleteEvent.cs" />
-    <Compile Include="Event\AfterNvrSavedEvent.cs" />
-    <Compile Include="Event\OpenNvrDetailViewEvent.cs" />
+    <Compile Include="Data\Repositories\GenericRepository.cs" />
+    <Compile Include="Data\Repositories\IGenericRepository.cs" />
+    <Compile Include="Event\AfterDetailDeletedEvent.cs" />
+    <Compile Include="Event\AfterDetailSavedEvent.cs" />
+    <Compile Include="Event\OpenDetailViewEvent.cs" />
     <Compile Include="NvrOrganizerDbDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>NvrOrganizerDbDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Startup\BootStrapper.cs" />
+    <Compile Include="ViewModel\DetailViewModelBase.cs" />
+    <Compile Include="ViewModel\IDetailViewModel.cs" />
     <Compile Include="ViewModel\INavigationViewModel.cs" />
     <Compile Include="ViewModel\INvrDetailViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />

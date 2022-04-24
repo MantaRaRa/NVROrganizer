@@ -12,13 +12,14 @@ using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using FriendOrganizer.UI.ViewModel;
 
 namespace NvrOrganizer.UI.ViewModel
 {
-    public class NvrDetailViewModel : ViewModelBase, INvrDetailViewModel
+    public class NvrDetailViewModel : DetailViewModelBase, INvrDetailViewModel
     {
         private INvrRepository _nvrRepository;
-        private IEventAggregator _eventAggregator;
+        
         private NvrWrapper _nvr;
         private NvrPhoneNumberWrapper _selectedPhoneNumber;
         private bool _hasChanges;
@@ -30,15 +31,13 @@ namespace NvrOrganizer.UI.ViewModel
             IEventAggregator eventAggregator,
             IMessageDialogService messageDialogService,
             IProgrammingLanguageLookupDataService programmingLanguageLookupDataService)
+            :base(eventAggregator)
         {
             _nvrRepository = nvrRepository;
-            _eventAggregator = eventAggregator;
+            
             _messageDialogService = messageDialogService;
             _programmingLanguageLookupDataService = programmingLanguageLookupDataService;
 
-
-            SaveCommand = new DelegateCommand(OnSaveExecute, OnSaveCanExecute);
-            DeleteCommand = new DelegateCommand(OnDeleteExecute);
             AddPhoneNumberCommand = new DelegateCommand(OnAddPhoneNumberExecute);
             RemovePhoneNumberCommand = new DelegateCommand(OnRemovePhoneNumberExecute, OnRemovePhoneNumberCanExecute);
 
@@ -47,7 +46,7 @@ namespace NvrOrganizer.UI.ViewModel
             PhoneNumbers = new ObservableCollection<NvrPhoneNumberWrapper>();
          }
 
-        public async Task LoadAsync(int? nvrId)
+        public override async Task LoadAsync(int? nvrId)
         {
             var nvr = nvrId.HasValue
                ? await _nvrRepository.GetByIdAsync(nvrId.Value)
@@ -143,25 +142,6 @@ namespace NvrOrganizer.UI.ViewModel
             }
         }
 
-        public bool HasChanges
-        {
-            get { return _hasChanges; }
-            set
-            {
-                if (_hasChanges != value)
-                {
-                    _hasChanges = value;
-                    OnPropertyChanged();
-                    ((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
-                }
-            }
-        }
-
-
-        public ICommand SaveCommand { get; }
-
-        public ICommand DeleteCommand { get; }
-
         public ICommand AddPhoneNumberCommand { get; }
 
         public ICommand RemovePhoneNumberCommand { get; }
@@ -169,19 +149,15 @@ namespace NvrOrganizer.UI.ViewModel
 
         public ObservableCollection<NvrPhoneNumberWrapper> PhoneNumbers { get; }
 
-        private async void OnSaveExecute()
+        protected override async void OnSaveExecute()
         {
           await _nvrRepository.SaveAsync();
             HasChanges = _nvrRepository.HasChanges();
-            _eventAggregator.GetEvent<AfterNvrSavedEvent>().Publish(
-                new AfterNvrSavedEventArgs
-                {
-                    Id = Nvr.Id,
-                    DisplayMember = $"{Nvr.FirstName} {Nvr.LastName}"
-                });
+            RaiseDetailSavedEvent(Nvr.Id, $"{Nvr.FirstName} {Nvr.LastName}");
+           
         }
 
-        private bool OnSaveCanExecute()
+        protected override bool OnSaveCanExecute()
         {
             return Nvr != null 
                 && !Nvr.HasErrors 
@@ -189,14 +165,16 @@ namespace NvrOrganizer.UI.ViewModel
                 && HasChanges;
         }
 
-        private async void OnDeleteExecute()
+        protected override async void OnDeleteExecute()
         {
             var result = _messageDialogService.ShowOKCancelDialog($"Do you really want to delete the selected nvr {Nvr.FirstName} {Nvr.LastName}?",
                "Question");
-            if(result == MessageDialogResult.OK) { 
+            if(result == MessageDialogResult.OK)
+            { 
             _nvrRepository.Remove(Nvr.Model);
            await _nvrRepository.SaveAsync();
-            _eventAggregator.GetEvent<AfterNvrDeleteEvent>().Publish(Nvr.Id);
+                RaiseDetailDeletedEvent(Nvr.Id);
+           
         }
         }
 

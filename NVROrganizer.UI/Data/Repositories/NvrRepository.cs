@@ -9,46 +9,27 @@ using System.Threading.Tasks;
 
 namespace NvrOrganizer.UI.Data.Repositories
 {
-    public class NvrRepository : INvrRepository
+    public class NvrRepository : GenericRepository<Nvr,NvrOrganizerDbContext>,
+                                 INvrRepository
     {
 
-        private NvrOrganizerDbContext _context;
-
         public NvrRepository(NvrOrganizerDbContext context)
+            : base(context)
         {
-            _context = context;
+           
         }
 
-        public void Add(Nvr nvr)
+        public override async Task<Nvr> GetByIdAsync(int nvrId)
         {
-            _context.Nvrs.Add(nvr);
-        }
-
-        public async Task<Nvr> GetByIdAsync(int nvrId)
-        {
-            return await _context.Nvrs
+            return await Context.Nvrs
                 .Include(n => n.PhoneNumbers)
                 .SingleAsync(n => n.Id == nvrId);
         }
 
-        public bool HasChanges()
-        {
-            return _context.ChangeTracker.HasChanges();
-        }
-
-        public void Remove(Nvr model)
-        {
-            _context.Nvrs.Remove(model);
-        }
-
         public void RemovePhoneNumber(NvrPhoneNumber model)
         {
-            _context.NvrPhoneNumbers.Remove(model);
+            Context.NvrPhoneNumbers.Remove(model);
         }
 
-        public async Task SaveAsync()
-        {
-            await _context.SaveChangesAsync();
-        }
     }
 }
