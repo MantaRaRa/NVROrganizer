@@ -17,6 +17,8 @@ namespace NvrOrganizer.DataAccess
 
         public DbSet<NvrPhoneNumber> NvrPhoneNumbers { get; set; }
 
+        public DbSet<Meeting> Meetings { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

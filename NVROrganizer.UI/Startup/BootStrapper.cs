@@ -24,10 +24,14 @@ namespace NvrOrganizer.UI.Startup
 
             builder.RegisterType<MainViewModel>().AsSelf();
             builder.RegisterType<NavigationViewModel>().As<INavigationViewModel>();
-            builder.RegisterType<NvrDetailViewModel>().As<INvrDetailViewModel>();
+            builder.RegisterType<NvrDetailViewModel>()
+                .Keyed<IDetailViewModel>(nameof(NvrDetailViewModel));
+            builder.RegisterType<MeetingDetailViewModel>()
+                .Keyed<IDetailViewModel>(nameof(MeetingDetailViewModel));
 
             builder.RegisterType<LookupDataService>().AsImplementedInterfaces();
             builder.RegisterType<NvrRepository>().As<INvrRepository>();
+            builder.RegisterType<MeetingRepository>().As<IMeetingRepository>();
 
             return builder.Build();
         }

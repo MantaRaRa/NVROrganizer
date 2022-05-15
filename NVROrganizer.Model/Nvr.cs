@@ -9,6 +9,7 @@ namespace NvrOrganizer.Model
          public Nvr()
             {
             PhoneNumbers = new Collection<NvrPhoneNumber>();
+            Meetings = new Collection<Meeting>();
             }
         
         public int Id { get; set; }
@@ -27,5 +28,7 @@ namespace NvrOrganizer.Model
         public ProgrammingLanguage FavoriteLanguage { get; set; }
 
         public ICollection<NvrPhoneNumber> PhoneNumbers { get; set; }
+
+        public ICollection<Meeting> Meetings { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using NvrOrganizer.UI.Event;
+﻿using Autofac.Features.Indexed;
+using NvrOrganizer.UI.Event;
 using NvrOrganizer.UI.View.Services;
 using Prism.Commands;
 using Prism.Events;
@@ -11,17 +12,17 @@ namespace NvrOrganizer.UI.ViewModel
     public class MainViewModel : ViewModelBase
     {
         private IEventAggregator _eventAggregator;
-        private Func<INvrDetailViewModel> _nvrDetailViewModelCreator;
+        private IIndex<string, IDetailViewModel> _detailViewModelCreator;
         private IMessageDialogService _messageDialogService;
         private IDetailViewModel _detailViewModel;
 
         public MainViewModel(INavigationViewModel navigationViewModel,
-            Func<INvrDetailViewModel> nvrDetailViewModelCreator,
+           IIndex<string,IDetailViewModel> detailViewModelCreator,
             IEventAggregator eventAggregator,
             IMessageDialogService messageDialogService)
         {
             _eventAggregator = eventAggregator;
-            _nvrDetailViewModelCreator = nvrDetailViewModelCreator;
+            _detailViewModelCreator = detailViewModelCreator;
             _messageDialogService = messageDialogService;
 
             _eventAggregator.GetEvent<OpenDetailViewEvent>()
@@ -65,14 +66,8 @@ namespace NvrOrganizer.UI.ViewModel
                 }
             }
 
-            switch (args.ViewModelName)
-            {
-                case nameof(NvrDetailViewModel):
-                    DetailViewModel = _nvrDetailViewModelCreator();
-                    break;
-            }
-
-           
+       
+           DetailViewModel = _detailViewModelCreator[args.ViewModelName];
             await DetailViewModel.LoadAsync(args.Id);
         }
 

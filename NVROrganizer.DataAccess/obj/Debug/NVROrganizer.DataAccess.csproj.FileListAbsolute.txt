@@ -49,3 +49,4 @@ C:\Users\berry\Desktop\Repo\NVROrganizer\NvrOrganizer.DataAccess\obj\Debug\NvrOr
 C:\Users\berry\Desktop\Repo\NVROrganizer\NvrOrganizer.DataAccess\obj\Debug\NvrOrganizer.DataAccess.dll
 C:\Users\berry\Desktop\Repo\NVROrganizer\NvrOrganizer.DataAccess\obj\Debug\NvrOrganizer.DataAccess.pdb
 C:\Users\berry\Desktop\Repo\NVROrganizer\NvrOrganizer.DataAccess\obj\Debug\NvrOrganizer.DataAccess.Migrations.AddedNvrPhoneNumbers.resources
+C:\Users\berry\Desktop\Repo\NVROrganizer\NvrOrganizer.DataAccess\obj\Debug\NvrOrganizer.DataAccess.Migrations.AddedMeeting.resources

@@ -9,7 +9,9 @@ using System.Threading.Tasks;
 
 namespace NvrOrganizer.UI.Data.Lookups
 {
-    public class LookupDataService : INvrLookupDataService, IProgrammingLanguageLookupDataService
+    public class LookupDataService : INvrLookupDataService, 
+                                     IProgrammingLanguageLookupDataService,
+                                     IMeetingLookupDataService
     {
         private Func<NvrOrganizerDbContext> _contextCreator;
 
@@ -44,6 +46,22 @@ namespace NvrOrganizer.UI.Data.Lookups
                         DisplayMember = n.Name
                     })
                     .ToListAsync();
+            }
+        }
+
+        public async Task<List<LookupItem>> GetMeetingLookupAsync()
+        {
+            using (var ctx = _contextCreator())
+            {
+                var items = await ctx.Meetings.AsNoTracking()
+                  .Select(m =>
+                     new LookupItem
+                     {
+                         Id = m.Id,
+                         DisplayMember = m.Title
+                     })
+                  .ToListAsync();
+                return items;
             }
         }
 

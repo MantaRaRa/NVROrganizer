@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LookupItem.cs" />
+    <Compile Include="Meeting.cs" />
     <Compile Include="Nvr.cs" />
     <Compile Include="NvrPhoneNumber.cs" />
     <Compile Include="ProgrammingLanguage.cs" />
