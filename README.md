@@ -1,6 +1,14 @@
 # NVROrganizer
 
-This App Helps me Locate the Necessary information to help my clients when they have problems with their Video systems. 
+Version 2.0 attributes:
+
+This App is a Vampped up version of the NVR Organizer,
+
+
+
+
+
+Version 1.0 attributes:
 
 The App retrieves the clients First name, Last Name and the requried Alias from a Local DataBase, clicking on the Left Navagation will populate the data on the right side.
 
