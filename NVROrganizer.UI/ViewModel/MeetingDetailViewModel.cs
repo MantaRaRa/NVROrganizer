@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Threading.Tasks;
-using FriendOrganizer.UI.ViewModel;
+using NvrOrganizer.UI.ViewModel;
 using NvrOrganizer.UI.Data.Repositories;
 using NvrOrganizer.UI.View.Services;
 using NvrOrganizer.UI.Wrapper;
 using Prism.Events;
 using Prism.Commands;
 using NvrOrganizer.Model;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Windows.Input;
+using System.Collections.Generic;
 
 namespace NvrOrganizer.UI.ViewModel
 {
@@ -15,6 +19,9 @@ namespace NvrOrganizer.UI.ViewModel
         private IMeetingRepository _meetingRepository;
         private MeetingWrapper _meeting;
         private IMessageDialogService _messageDialogService;
+        private Nvr _selectedAvailableNvr;
+        private Nvr _selectedAddedNvr;
+        private List<Nvr> _allNvrs;
 
         public MeetingDetailViewModel(IEventAggregator eventAggregator,
           IMessageDialogService messageDialogService,
@@ -22,6 +29,11 @@ namespace NvrOrganizer.UI.ViewModel
         {
             _meetingRepository = meetingRepository;
             _messageDialogService = messageDialogService;
+
+            AddedNvrs = new ObservableCollection<Nvr>();
+            AvailableNvrs = new ObservableCollection<Nvr>();
+            AddNvrCommand = new DelegateCommand(OnAddNvrExecute, OnAddNvrCanExecute);
+            RemoveNvrCommand = new DelegateCommand(OnRemoveNvrExecute, OnRemoveNvrCanExecute);
         }
 
         public MeetingWrapper Meeting
@@ -34,6 +46,36 @@ namespace NvrOrganizer.UI.ViewModel
             }
         }
 
+        public ICommand AddNvrCommand { get; }
+
+        public ICommand RemoveNvrCommand { get; }
+
+        public ObservableCollection<Nvr> AddedNvrs { get; }
+
+        public ObservableCollection<Nvr> AvailableNvrs { get; }
+
+        public Nvr SelectedAvailableNvr
+        {
+            get { return _selectedAvailableNvr; }
+            set
+            {
+                _selectedAvailableNvr = value;
+                OnPropertyChanged();
+                ((DelegateCommand)AddNvrCommand).RaiseCanExecuteChanged();
+            }
+        }
+
+        public Nvr SelectedAddedNvr
+        {
+            get { return _selectedAddedNvr; }
+            set
+            {
+                _selectedAddedNvr = value;
+                OnPropertyChanged();
+                ((DelegateCommand)RemoveNvrCommand).RaiseCanExecuteChanged();
+            }
+        }
+
         public override async Task LoadAsync(int? meetingId)
         {
             var meeting = meetingId.HasValue
@@ -41,6 +83,10 @@ namespace NvrOrganizer.UI.ViewModel
               : CreateNewMeeting();
 
             InitializeMeeting(meeting);
+                    
+            _allNvrs = await _meetingRepository.GetAllNvrsAsync();
+
+            SetupPicklist();
         }
 
         protected override void OnDeleteExecute()
@@ -64,6 +110,24 @@ namespace NvrOrganizer.UI.ViewModel
             await _meetingRepository.SaveAsync();
             HasChanges = _meetingRepository.HasChanges();
             RaiseDetailSavedEvent(Meeting.Id, Meeting.Title);
+        }
+
+        private void SetupPicklist()
+        {
+            var meetingNvrIds = Meeting.Model.Nvrs.Select(n => n.Id).ToList();
+            var addedNvrs = _allNvrs.Where(n => meetingNvrIds.Contains(n.Id)).OrderBy(n => n.FirstName);
+            var availableNvrs = _allNvrs.Except(addedNvrs).OrderBy(n => n.FirstName);
+
+            AddedNvrs.Clear();
+            AvailableNvrs.Clear();
+            foreach (var addedNvr in addedNvrs)
+            {
+                AddedNvrs.Add(addedNvr);
+            }
+            foreach (var availableNvr in availableNvrs)
+            {
+                AvailableNvrs.Add(availableNvr);
+            }
         }
 
         private Meeting CreateNewMeeting()
@@ -99,6 +163,38 @@ namespace NvrOrganizer.UI.ViewModel
                 // Little trick to trigger the validation
                 Meeting.Title = "";
             }
+        }
+
+        private void OnRemoveNvrExecute()
+        {
+            var nvrToRemove = SelectedAddedNvr;
+
+            Meeting.Model.Nvrs.Remove(nvrToRemove);
+            AddedNvrs.Remove(nvrToRemove);
+            AvailableNvrs.Add(nvrToRemove);
+            HasChanges = _meetingRepository.HasChanges();
+            ((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
+        }
+      
+        private bool OnRemoveNvrCanExecute()
+        {
+            return SelectedAddedNvr != null;
+        }
+
+        private bool OnAddNvrCanExecute()
+        {
+            return SelectedAvailableNvr != null;
+        }
+
+        private void OnAddNvrExecute()
+        {
+            var nvrToAdd = SelectedAvailableNvr;
+
+            Meeting.Model.Nvrs.Add(nvrToAdd);
+            AddedNvrs.Add(nvrToAdd);
+            AvailableNvrs.Remove(nvrToAdd);
+            HasChanges = _meetingRepository.HasChanges();
+            ((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
         }
     }
 }

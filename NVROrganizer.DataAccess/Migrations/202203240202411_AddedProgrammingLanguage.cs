@@ -1,4 +1,4 @@
-﻿namespace FriendOrganizer.DataAccess.Migrations
+﻿namespace NvrOrganizer.DataAccess.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;

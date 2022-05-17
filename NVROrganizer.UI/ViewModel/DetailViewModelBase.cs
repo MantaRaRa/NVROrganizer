@@ -5,7 +5,7 @@ using Prism.Events;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace FriendOrganizer.UI.ViewModel
+namespace NvrOrganizer.UI.ViewModel
 {
     public abstract class DetailViewModelBase : ViewModelBase, IDetailViewModel
     {

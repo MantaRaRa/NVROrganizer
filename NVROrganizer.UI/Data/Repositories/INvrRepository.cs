@@ -1,5 +1,6 @@
 ﻿using NvrOrganizer.Model;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace NvrOrganizer.UI.Data.Repositories
 {
@@ -7,5 +8,6 @@ namespace NvrOrganizer.UI.Data.Repositories
     {
       
         void RemovePhoneNumber(NvrPhoneNumber model);
+        Task<bool> HasMeetingsAsync(int nvrId);
     }
 }

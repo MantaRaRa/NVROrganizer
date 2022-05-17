@@ -12,7 +12,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using FriendOrganizer.UI.ViewModel;
+using NvrOrganizer.UI.ViewModel;
 
 namespace NvrOrganizer.UI.ViewModel
 {
@@ -167,7 +167,13 @@ namespace NvrOrganizer.UI.ViewModel
 
         protected override async void OnDeleteExecute()
         {
-            var result = _messageDialogService.ShowOKCancelDialog($"Do you really want to delete the selected nvr {Nvr.FirstName} {Nvr.LastName}?",
+            if (await _nvrRepository.HasMeetingsAsync(Nvr.Id))
+            {
+                _messageDialogService.ShowInfoDialog($"{Nvr.FirstName} {Nvr.LastName} can't be deleted, as this NVR is part of at least one meeting");
+                return;
+            }
+
+            var result = _messageDialogService.ShowOKCancelDialog($"Do you really want to delete the selected NVR {Nvr.FirstName} {Nvr.LastName}?",
                "Question");
             if(result == MessageDialogResult.OK)
             { 

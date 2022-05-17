@@ -26,6 +26,13 @@ namespace NvrOrganizer.UI.Data.Repositories
                 .SingleAsync(n => n.Id == nvrId);
         }
 
+        public async Task<bool> HasMeetingsAsync(int nvrId)
+        {
+            return await Context.Meetings.AsNoTracking()
+                .Include(m => m.Nvrs)
+                .AnyAsync(m => m.Nvrs.Any(n => n.Id == nvrId));
+        }
+
         public void RemovePhoneNumber(NvrPhoneNumber model)
         {
             Context.NvrPhoneNumbers.Remove(model);

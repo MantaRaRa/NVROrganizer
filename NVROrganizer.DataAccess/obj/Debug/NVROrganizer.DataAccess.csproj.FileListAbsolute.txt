@@ -42,7 +42,6 @@ C:\Users\berry\Desktop\Repo\NVROrganizer\NvrOrganizer.DataAccess\bin\Debug\Entit
 C:\Users\berry\Desktop\Repo\NVROrganizer\NvrOrganizer.DataAccess\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\berry\Desktop\Repo\NVROrganizer\NvrOrganizer.DataAccess\obj\Debug\NvrOrganizer.DataAccess.csproj.AssemblyReference.cache
 C:\Users\berry\Desktop\Repo\NVROrganizer\NvrOrganizer.DataAccess\obj\Debug\NvrOrganizer.DataAccess.Migrations.InitialDatabase.resources
-C:\Users\berry\Desktop\Repo\NVROrganizer\NvrOrganizer.DataAccess\obj\Debug\FriendOrganizer.DataAccess.Migrations.AddedProgrammingLanguage.resources
 C:\Users\berry\Desktop\Repo\NVROrganizer\NvrOrganizer.DataAccess\obj\Debug\NvrOrganizer.DataAccess.csproj.GenerateResource.cache
 C:\Users\berry\Desktop\Repo\NVROrganizer\NvrOrganizer.DataAccess\obj\Debug\NvrOrganizer.DataAccess.csproj.CoreCompileInputs.cache
 C:\Users\berry\Desktop\Repo\NVROrganizer\NvrOrganizer.DataAccess\obj\Debug\NvrOrganizer.DataAccess.csproj.CopyComplete
@@ -50,3 +49,4 @@ C:\Users\berry\Desktop\Repo\NVROrganizer\NvrOrganizer.DataAccess\obj\Debug\NvrOr
 C:\Users\berry\Desktop\Repo\NVROrganizer\NvrOrganizer.DataAccess\obj\Debug\NvrOrganizer.DataAccess.pdb
 C:\Users\berry\Desktop\Repo\NVROrganizer\NvrOrganizer.DataAccess\obj\Debug\NvrOrganizer.DataAccess.Migrations.AddedNvrPhoneNumbers.resources
 C:\Users\berry\Desktop\Repo\NVROrganizer\NvrOrganizer.DataAccess\obj\Debug\NvrOrganizer.DataAccess.Migrations.AddedMeeting.resources
+C:\Users\berry\Desktop\Repo\NVROrganizer\NvrOrganizer.DataAccess\obj\Debug\NvrOrganizer.DataAccess.Migrations.AddedProgrammingLanguage.resources
