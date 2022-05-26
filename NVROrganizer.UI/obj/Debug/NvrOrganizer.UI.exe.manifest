@@ -114,14 +114,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="NvrOrganizer.UI.exe" size="113656">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="NvrOrganizer.UI.exe" size="115704">
       <assemblyIdentity name="NvrOrganizer.UI" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>B4GwE41UgaPK7lWCFgEVNiJq/mH94l9ROFvmEsvKX0A=</dsig:DigestValue>
+        <dsig:DigestValue>TOCMWEce67R6cOkZWv5TzAqCwAzj4HTjkY7AEuxNtKk=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

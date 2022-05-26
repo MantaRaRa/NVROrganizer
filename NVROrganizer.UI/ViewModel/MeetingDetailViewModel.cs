@@ -82,6 +82,8 @@ namespace NvrOrganizer.UI.ViewModel
               ? await _meetingRepository.GetByIdAsync(meetingId.Value)
               : CreateNewMeeting();
 
+            Id = meeting.Id;
+
             InitializeMeeting(meeting);
                     
             _allNvrs = await _meetingRepository.GetAllNvrsAsync();
@@ -109,6 +111,7 @@ namespace NvrOrganizer.UI.ViewModel
         {
             await _meetingRepository.SaveAsync();
             HasChanges = _meetingRepository.HasChanges();
+            Id = Meeting.Id;
             RaiseDetailSavedEvent(Meeting.Id, Meeting.Title);
         }
 
@@ -155,14 +158,26 @@ namespace NvrOrganizer.UI.ViewModel
                 {
                     ((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
                 }
+
+                if (e.PropertyName == nameof(Meeting.Title)) 
+                {
+                    SetTitle();
+                }
             };
             ((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
+
 
             if (Meeting.Id == 0)
             {
                 // Little trick to trigger the validation
                 Meeting.Title = "";
             }
+            SetTitle();
+        }
+
+        private void SetTitle()
+        {
+            Title = Meeting.Title;
         }
 
         private void OnRemoveNvrExecute()

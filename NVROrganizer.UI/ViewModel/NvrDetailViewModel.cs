@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using NvrOrganizer.UI.ViewModel;
+using System;
 
 namespace NvrOrganizer.UI.ViewModel
 {
@@ -52,6 +53,8 @@ namespace NvrOrganizer.UI.ViewModel
                ? await _nvrRepository.GetByIdAsync(nvrId.Value)
                : CreateNewNvr();
 
+            Id = nvr.Id;
+
             InitializeNvr(nvr);
 
             InitializeNvrPhoneNumbers(nvr.PhoneNumbers);
@@ -73,6 +76,12 @@ namespace NvrOrganizer.UI.ViewModel
                 {
                     ((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
                 }
+
+                if (e.PropertyName == nameof(Nvr.FirstName)
+                    || e.PropertyName == nameof(Nvr.LastName))
+                    {
+                    SetTitle();
+                    }
             };
             ((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
             if (Nvr.Id == 0)
@@ -80,6 +89,12 @@ namespace NvrOrganizer.UI.ViewModel
                 //Little trick to trigger the validation
                 Nvr.FirstName = "";
             }
+            SetTitle();
+        }
+
+        private void SetTitle()
+        {
+            Title = $"{Nvr.FirstName} {Nvr.LastName}";
         }
 
         private void InitializeNvrPhoneNumbers(ICollection<NvrPhoneNumber> phoneNumbers)
@@ -153,6 +168,7 @@ namespace NvrOrganizer.UI.ViewModel
         {
           await _nvrRepository.SaveAsync();
             HasChanges = _nvrRepository.HasChanges();
+            Id = Nvr.Id;
             RaiseDetailSavedEvent(Nvr.Id, $"{Nvr.FirstName} {Nvr.LastName}");
            
         }
