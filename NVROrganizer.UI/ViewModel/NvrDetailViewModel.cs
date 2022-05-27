@@ -23,8 +23,6 @@ namespace NvrOrganizer.UI.ViewModel
         
         private NvrWrapper _nvr;
         private NvrPhoneNumberWrapper _selectedPhoneNumber;
-        private bool _hasChanges;
-        private IMessageDialogService _messageDialogService;
         private IProgrammingLanguageLookupDataService _programmingLanguageLookupDataService;
        
 
@@ -32,11 +30,9 @@ namespace NvrOrganizer.UI.ViewModel
             IEventAggregator eventAggregator,
             IMessageDialogService messageDialogService,
             IProgrammingLanguageLookupDataService programmingLanguageLookupDataService)
-            :base(eventAggregator)
+            :base(eventAggregator,messageDialogService)
         {
             _nvrRepository = nvrRepository;
-            
-            _messageDialogService = messageDialogService;
             _programmingLanguageLookupDataService = programmingLanguageLookupDataService;
 
             AddPhoneNumberCommand = new DelegateCommand(OnAddPhoneNumberExecute);
@@ -185,11 +181,11 @@ namespace NvrOrganizer.UI.ViewModel
         {
             if (await _nvrRepository.HasMeetingsAsync(Nvr.Id))
             {
-                _messageDialogService.ShowInfoDialog($"{Nvr.FirstName} {Nvr.LastName} can't be deleted, as this NVR is part of at least one meeting");
+                MessageDialogService.ShowInfoDialog($"{Nvr.FirstName} {Nvr.LastName} can't be deleted, as this NVR is part of at least one meeting");
                 return;
             }
 
-            var result = _messageDialogService.ShowOKCancelDialog($"Do you really want to delete the selected NVR {Nvr.FirstName} {Nvr.LastName}?",
+            var result = MessageDialogService.ShowOKCancelDialog($"Do you really want to delete the selected NVR {Nvr.FirstName} {Nvr.LastName}?",
                "Question");
             if(result == MessageDialogResult.OK)
             { 

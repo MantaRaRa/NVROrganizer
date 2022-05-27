@@ -18,17 +18,15 @@ namespace NvrOrganizer.UI.ViewModel
     {
         private IMeetingRepository _meetingRepository;
         private MeetingWrapper _meeting;
-        private IMessageDialogService _messageDialogService;
         private Nvr _selectedAvailableNvr;
         private Nvr _selectedAddedNvr;
         private List<Nvr> _allNvrs;
 
         public MeetingDetailViewModel(IEventAggregator eventAggregator,
           IMessageDialogService messageDialogService,
-          IMeetingRepository meetingRepository) : base(eventAggregator)
+          IMeetingRepository meetingRepository) : base(eventAggregator,messageDialogService)
         {
             _meetingRepository = meetingRepository;
-            _messageDialogService = messageDialogService;
 
             AddedNvrs = new ObservableCollection<Nvr>();
             AvailableNvrs = new ObservableCollection<Nvr>();
@@ -93,7 +91,7 @@ namespace NvrOrganizer.UI.ViewModel
 
         protected override void OnDeleteExecute()
         {
-            var result = _messageDialogService.ShowOKCancelDialog($"Do you really want to delete the appointment {Meeting.Title}?", "Question");
+            var result = MessageDialogService.ShowOKCancelDialog($"Do you really want to delete the appointment {Meeting.Title}?", "Question");
             if (result == MessageDialogResult.OK)
             {
                 _meetingRepository.Remove(Meeting.Model);
