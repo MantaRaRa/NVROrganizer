@@ -40,7 +40,7 @@
         <TabControl Grid.Row="1" 
                             Grid.Column="1"
                             ItemsSource="{Binding DetailViewModels}"
-                            SelectedItem="{Binding SeletedDetailViewModel,Mode=TwoWay}">
+                            SelectedItem="{Binding SelectedDetailViewModel,Mode=TwoWay}">
             <TabControl.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">

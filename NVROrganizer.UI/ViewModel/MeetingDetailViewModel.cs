@@ -11,6 +11,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
 using System.Collections.Generic;
+using NvrOrganizer.UI.Event;
 
 namespace NvrOrganizer.UI.ViewModel
 {
@@ -27,6 +28,8 @@ namespace NvrOrganizer.UI.ViewModel
           IMeetingRepository meetingRepository) : base(eventAggregator,messageDialogService)
         {
             _meetingRepository = meetingRepository;
+            eventAggregator.GetEvent<AfterDetailSavedEvent>().Subscribe(AfterDetailSaved);
+            eventAggregator.GetEvent<AfterDetailDeletedEvent>().Subscribe(AfterDetailDeleted);
 
             AddedNvrs = new ObservableCollection<Nvr>();
             AvailableNvrs = new ObservableCollection<Nvr>();
@@ -74,13 +77,13 @@ namespace NvrOrganizer.UI.ViewModel
             }
         }
 
-        public override async Task LoadAsync(int? meetingId)
+        public override async Task LoadAsync(int meetingId)
         {
-            var meeting = meetingId.HasValue
-              ? await _meetingRepository.GetByIdAsync(meetingId.Value)
+            var meeting = meetingId > 0
+              ? await _meetingRepository.GetByIdAsync(meetingId)
               : CreateNewMeeting();
 
-            Id = meeting.Id;
+            Id = meetingId;
 
             InitializeMeeting(meeting);
                     
@@ -208,6 +211,28 @@ namespace NvrOrganizer.UI.ViewModel
             AvailableNvrs.Remove(nvrToAdd);
             HasChanges = _meetingRepository.HasChanges();
             ((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
+        }
+
+        private async void AfterDetailSaved(AfterDetailSavedEventArgs args)
+        {
+            if(args.ViewModelName == nameof(NvrDetailViewModel))
+            {
+                await _meetingRepository.ReloadNvrAsync(args.Id);
+                _allNvrs = await _meetingRepository.GetAllNvrsAsync();
+
+                SetupPicklist();
+            }
+        }
+
+        private async void AfterDetailDeleted(AfterDetailDeletedEventArgs args)
+        {
+            if (args.ViewModelName == nameof(NvrDetailViewModel))
+            {
+               
+                _allNvrs = await _meetingRepository.GetAllNvrsAsync();
+
+                SetupPicklist();
+            }
         }
     }
 }

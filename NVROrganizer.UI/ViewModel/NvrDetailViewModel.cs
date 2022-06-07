@@ -43,13 +43,13 @@ namespace NvrOrganizer.UI.ViewModel
             PhoneNumbers = new ObservableCollection<NvrPhoneNumberWrapper>();
          }
 
-        public override async Task LoadAsync(int? nvrId)
+        public override async Task LoadAsync(int nvrId)
         {
-            var nvr = nvrId.HasValue
-               ? await _nvrRepository.GetByIdAsync(nvrId.Value)
+            var nvr = nvrId > 0
+               ? await _nvrRepository.GetByIdAsync(nvrId)
                : CreateNewNvr();
 
-            Id = nvr.Id;
+            Id = nvrId;
 
             InitializeNvr(nvr);
 

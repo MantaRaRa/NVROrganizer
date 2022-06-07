@@ -3,6 +3,7 @@ using NvrOrganizer.DataAccess;
 using NvrOrganizer.Model;
 using System.Data.Entity;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace NvrOrganizer.UI.Data.Repositories
 {
@@ -24,6 +25,16 @@ namespace NvrOrganizer.UI.Data.Repositories
         {
             return await Context.Set<Nvr>()
                 .ToListAsync();
+        }
+
+        public async Task ReloadNvrAsync(int nvrId)
+        {
+            var dbEntityEntry = Context.ChangeTracker.Entries<Nvr>()
+                .SingleOrDefault(db => db.Entity.Id == nvrId);
+            if (dbEntityEntry!=null)
+            {
+                await dbEntityEntry.ReloadAsync();
+            }
         }
     }
 }

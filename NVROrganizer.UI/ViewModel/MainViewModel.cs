@@ -9,6 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
+
 namespace NvrOrganizer.UI.ViewModel
 {
     public class MainViewModel : ViewModelBase
@@ -34,7 +35,7 @@ namespace NvrOrganizer.UI.ViewModel
             _eventAggregator.GetEvent<AfterDetailDeletedEvent>()
                 .Subscribe(AfterDetailDeleted);
             _eventAggregator.GetEvent<AfterDetailClosedEvent>()
-                .Subscribe(AfterDetailClosed);
+                .Subscribe(AfterDetailClosed); 
 
             CreateNewDetailCommand = new DelegateCommand<Type>(OnCreateNewDetailExecute);
 
@@ -80,10 +81,12 @@ namespace NvrOrganizer.UI.ViewModel
            
         }
 
+        private int nextNewItemId = 0;
         private void OnCreateNewDetailExecute(Type viewModelType)
         {
             OnOpenDetailView(
-                new OpenDetailViewEventArgs { ViewModelName = viewModelType.Name});
+                new OpenDetailViewEventArgs { Id = nextNewItemId--, 
+                    ViewModelName = viewModelType.Name});
         }
 
         private void AfterDetailDeleted(AfterDetailDeletedEventArgs args)
