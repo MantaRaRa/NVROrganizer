@@ -187,3 +187,5 @@ C:\Users\berry\Desktop\Repo\NVROrganizer\NVROrganizer.UI\bin\Debug\sv\Xceed.Wpf.
 C:\Users\berry\Desktop\Repo\NVROrganizer\NVROrganizer.UI\bin\Debug\zh-Hans\Xceed.Wpf.AvalonDock.resources.dll
 C:\Users\berry\Desktop\Repo\NVROrganizer\NVROrganizer.UI\obj\Debug\View\MeetingDetailView.g.cs
 C:\Users\berry\Desktop\Repo\NVROrganizer\NVROrganizer.UI\obj\Debug\View\MeetingDetailView.baml
+C:\Users\berry\Desktop\Repo\NVROrganizer\NVROrganizer.UI\obj\Debug\View\ProgrammingLanguageDetailView.g.cs
+C:\Users\berry\Desktop\Repo\NVROrganizer\NVROrganizer.UI\obj\Debug\View\ProgrammingLanguageDetailView.baml
