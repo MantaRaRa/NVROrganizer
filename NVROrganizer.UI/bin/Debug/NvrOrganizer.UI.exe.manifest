@@ -90,14 +90,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="NvrOrganizer.DataAccess.dll" size="31232">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="NvrOrganizer.DataAccess.dll" size="32256">
       <assemblyIdentity name="NvrOrganizer.DataAccess" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>9U3GiYnx307BOgIPg9zdNQI96oCVfbm+OUjFDnfdDiA=</dsig:DigestValue>
+        <dsig:DigestValue>qtdpPxjb7ETHPxDX+YvPnWln3i6mWl8JI1wFO7rLULA=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -109,19 +109,19 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>k9IU5TTBXNEhDKGKdfARAaOdbphV4QohsfX7ObTv3F8=</dsig:DigestValue>
+        <dsig:DigestValue>NmIf4kHaJSHY3jVpFXNOIFcx88I5nxdfK7u09bXyVSg=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="NvrOrganizer.UI.exe" size="131064">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="NvrOrganizer.UI.exe" size="134136">
       <assemblyIdentity name="NvrOrganizer.UI" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>x6wI3qFzry6g7Y/7zGx4h0pLLPgug468BrRfYXQU5OE=</dsig:DigestValue>
+        <dsig:DigestValue>P/O/ooiMWXFAlF7Y+vFS7BKDEp7jhht6uA3VQdHyj5E=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

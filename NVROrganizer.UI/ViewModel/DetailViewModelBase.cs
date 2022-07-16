@@ -2,6 +2,9 @@
 using NvrOrganizer.UI.View.Services;
 using Prism.Commands;
 using Prism.Events;
+using System;
+using System.Data.Entity.Infrastructure;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -115,7 +118,46 @@ namespace NvrOrganizer.UI.ViewModel
             {
                 Id = this.Id,
                 ViewModelName = this.GetType().Name
-            });   
+            });
+
+            protected async Task SaveWithOptimisticConcurrencyAsync(Func<Task> saveFunc,
+             Action afterSaveAction)
+            {
+                try
+                {
+                    await saveFunc();
+                }
+                catch (DbUpdateConcurrencyException ex)
+                {
+                    var databaseValues = ex.Entries.Single().GetDatabaseValues();
+                    if (databaseValues == null)
+                    {
+                        MessageDialogService.ShowInfoDialog("The entity has been deleted by another user");
+                        RaiseDetailDeletedEvent(Id);
+                        return;
+                    }
+
+                    var result = MessageDialogService.ShowOKCancelDialog("The entity has been changed in "
+                     + "the meantime by someone else. Click OK to save your changes anyway, click Cancel "
+                     + "to reload the entity from the database.", "Question");
+
+                    if (result == MessageDialogResult.OK)
+                    {
+                        // Update the original values with database-values
+                        var entry = ex.Entries.Single();
+                        entry.OriginalValues.SetValues(entry.GetDatabaseValues());
+                        await saveFunc();
+                    }
+                    else
+                    {
+                        // Reload entity from database
+                        await ex.Entries.Single().ReloadAsync();
+                        await LoadAsync(Id);
+                    }
+                };
+
+                afterSaveAction();
+            }
         }
     }
 

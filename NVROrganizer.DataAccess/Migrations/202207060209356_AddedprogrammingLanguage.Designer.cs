@@ -7,13 +7,13 @@ namespace NvrOrganizer.DataAccess.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class AddedProgrammingLanguage : IMigrationMetadata
+    public sealed partial class AddedprogrammingLanguage : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddedProgrammingLanguage));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddedprogrammingLanguage));
         
         string IMigrationMetadata.Id
         {
-            get { return "202203240202411_AddedProgrammingLanguage"; }
+            get { return "202207060209356_AddedprogrammingLanguage"; }
         }
         
         string IMigrationMetadata.Source

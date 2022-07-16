@@ -55,10 +55,6 @@
     <Compile Include="Migrations\202203221347520_InitialDatabase.designer.cs">
       <DependentUpon>202203221347520_InitialDatabase.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202203240202411_AddedProgrammingLanguage.cs" />
-    <Compile Include="Migrations\202203240202411_AddedProgrammingLanguage.designer.cs">
-      <DependentUpon>202203240202411_AddedProgrammingLanguage.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\202204230204159_AddedNvrPhoneNumbers.cs" />
     <Compile Include="Migrations\202204230204159_AddedNvrPhoneNumbers.designer.cs">
       <DependentUpon>202204230204159_AddedNvrPhoneNumbers.cs</DependentUpon>
@@ -66,6 +62,10 @@
     <Compile Include="Migrations\202204240356007_AddedMeeting.cs" />
     <Compile Include="Migrations\202204240356007_AddedMeeting.designer.cs">
       <DependentUpon>202204240356007_AddedMeeting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202207060209356_AddedprogrammingLanguage.cs" />
+    <Compile Include="Migrations\202207060209356_AddedprogrammingLanguage.designer.cs">
+      <DependentUpon>202207060209356_AddedprogrammingLanguage.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="NvrOrganizerDbContext.cs" />
@@ -85,14 +85,14 @@
     <EmbeddedResource Include="Migrations\202203221347520_InitialDatabase.resx">
       <DependentUpon>202203221347520_InitialDatabase.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202203240202411_AddedProgrammingLanguage.resx">
-      <DependentUpon>202203240202411_AddedProgrammingLanguage.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202204230204159_AddedNvrPhoneNumbers.resx">
       <DependentUpon>202204230204159_AddedNvrPhoneNumbers.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202204240356007_AddedMeeting.resx">
       <DependentUpon>202204240356007_AddedMeeting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207060209356_AddedprogrammingLanguage.resx">
+      <DependentUpon>202207060209356_AddedprogrammingLanguage.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

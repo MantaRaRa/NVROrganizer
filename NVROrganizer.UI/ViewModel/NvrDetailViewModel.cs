@@ -14,6 +14,7 @@ using System.ComponentModel;
 using System.Linq;
 using NvrOrganizer.UI.ViewModel;
 using System;
+using System.Data.Entity.Infrastructure;
 
 namespace NvrOrganizer.UI.ViewModel
 {
@@ -165,11 +166,14 @@ namespace NvrOrganizer.UI.ViewModel
 
         protected override async void OnSaveExecute()
         {
-          await _nvrRepository.SaveAsync();
-            HasChanges = _nvrRepository.HasChanges();
-            Id = Nvr.Id;
-            RaiseDetailSavedEvent(Nvr.Id, $"{Nvr.FirstName} {Nvr.LastName}");
-           
+            await SaveWithOptimisticConcurrencyAsync(_nvrRepository.SaveAsync,
+                () =>
+
+            {
+                HasChanges = _nvrRepository.HasChanges();
+                Id = Nvr.Id;
+                RaiseDetailSavedEvent(Nvr.Id, $"{Nvr.FirstName} {Nvr.LastName}");
+            });
         }
 
         protected override bool OnSaveCanExecute()
