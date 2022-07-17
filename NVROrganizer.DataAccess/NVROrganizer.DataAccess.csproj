@@ -67,6 +67,10 @@
     <Compile Include="Migrations\202207060209356_AddedprogrammingLanguage.designer.cs">
       <DependentUpon>202207060209356_AddedprogrammingLanguage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202207170951430_AddRowVersion.cs" />
+    <Compile Include="Migrations\202207170951430_AddRowVersion.designer.cs">
+      <DependentUpon>202207170951430_AddRowVersion.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="NvrOrganizerDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -93,6 +97,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202207060209356_AddedprogrammingLanguage.resx">
       <DependentUpon>202207060209356_AddedprogrammingLanguage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207170951430_AddRowVersion.resx">
+      <DependentUpon>202207170951430_AddRowVersion.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
