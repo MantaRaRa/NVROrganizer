@@ -63,13 +63,13 @@
     <Compile Include="Migrations\202204240356007_AddedMeeting.designer.cs">
       <DependentUpon>202204240356007_AddedMeeting.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202207060209356_AddedprogrammingLanguage.cs" />
-    <Compile Include="Migrations\202207060209356_AddedprogrammingLanguage.designer.cs">
-      <DependentUpon>202207060209356_AddedprogrammingLanguage.cs</DependentUpon>
+    <Compile Include="Migrations\202207192343276_AddedProgrammingLanguage.cs" />
+    <Compile Include="Migrations\202207192343276_AddedProgrammingLanguage.designer.cs">
+      <DependentUpon>202207192343276_AddedProgrammingLanguage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202207170951430_AddRowVersion.cs" />
-    <Compile Include="Migrations\202207170951430_AddRowVersion.designer.cs">
-      <DependentUpon>202207170951430_AddRowVersion.cs</DependentUpon>
+    <Compile Include="Migrations\202207192344259_AddedRowVersionToNvr.cs" />
+    <Compile Include="Migrations\202207192344259_AddedRowVersionToNvr.designer.cs">
+      <DependentUpon>202207192344259_AddedRowVersionToNvr.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="NvrOrganizerDbContext.cs" />
@@ -95,11 +95,11 @@
     <EmbeddedResource Include="Migrations\202204240356007_AddedMeeting.resx">
       <DependentUpon>202204240356007_AddedMeeting.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202207060209356_AddedprogrammingLanguage.resx">
-      <DependentUpon>202207060209356_AddedprogrammingLanguage.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202207192343276_AddedProgrammingLanguage.resx">
+      <DependentUpon>202207192343276_AddedProgrammingLanguage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202207170951430_AddRowVersion.resx">
-      <DependentUpon>202207170951430_AddRowVersion.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202207192344259_AddedRowVersionToNvr.resx">
+      <DependentUpon>202207192344259_AddedRowVersionToNvr.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

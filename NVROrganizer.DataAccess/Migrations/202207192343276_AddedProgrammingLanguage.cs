@@ -3,7 +3,7 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class AddRowVersion : DbMigration
+    public partial class AddedProgrammingLanguage : DbMigration
     {
         public override void Up()
         {

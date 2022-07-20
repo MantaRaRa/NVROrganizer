@@ -90,14 +90,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="NvrOrganizer.DataAccess.dll" size="32256">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="NvrOrganizer.DataAccess.dll" size="34816">
       <assemblyIdentity name="NvrOrganizer.DataAccess" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>qtdpPxjb7ETHPxDX+YvPnWln3i6mWl8JI1wFO7rLULA=</dsig:DigestValue>
+        <dsig:DigestValue>RBD/PDBLx/MxnmKxFh6guyHc1kVfPMxu5FG/ywc589M=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -114,14 +114,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="NvrOrganizer.UI.exe" size="134136">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="NvrOrganizer.UI.exe" size="133112">
       <assemblyIdentity name="NvrOrganizer.UI" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>P/O/ooiMWXFAlF7Y+vFS7BKDEp7jhht6uA3VQdHyj5E=</dsig:DigestValue>
+        <dsig:DigestValue>y0wP5uf9adKAIplrJ16rZJO+W+JfXkeDCa3CEz28jdE=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
