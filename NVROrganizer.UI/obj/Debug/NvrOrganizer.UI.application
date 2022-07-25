@@ -7,14 +7,14 @@
     <framework targetVersion="4.7.2" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="NvrOrganizer.UI.exe.manifest" size="25410">
+    <dependentAssembly dependencyType="install" codebase="NvrOrganizer.UI.exe.manifest" size="28161">
       <assemblyIdentity name="NvrOrganizer.UI.exe" version="1.0.0.0" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>xcp7wTs7462yKT23prvDaYSedfAPuRksHxNviAP4dhc=</dsig:DigestValue>
+        <dsig:DigestValue>bMQtD3RNi67MD0W8YVFYweCTaf8fUpcBxq3nvW4GrTo=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

@@ -132,7 +132,6 @@ C:\Users\berry\Desktop\Repo\NVROrganizer\NVROrganizer.UI\bin\Debug\System.Thread
 C:\Users\berry\Desktop\Repo\NVROrganizer\NVROrganizer.UI\bin\Debug\NvrOrganizer.DataAccess.pdb
 C:\Users\berry\Desktop\Repo\NVROrganizer\NVROrganizer.UI\bin\Debug\NvrOrganizer.DataAccess.dll.config
 C:\Users\berry\Desktop\Repo\NVROrganizer\NVROrganizer.UI\bin\Debug\NvrOrganizer.Model.pdb
-C:\Users\berry\Desktop\Repo\NVROrganizer\NVROrganizer.UI\bin\Debug\Autofac.pdb
 C:\Users\berry\Desktop\Repo\NVROrganizer\NVROrganizer.UI\bin\Debug\Autofac.xml
 C:\Users\berry\Desktop\Repo\NVROrganizer\NVROrganizer.UI\bin\Debug\EntityFramework.xml
 C:\Users\berry\Desktop\Repo\NVROrganizer\NVROrganizer.UI\bin\Debug\EntityFramework.SqlServer.xml
@@ -189,3 +188,13 @@ C:\Users\berry\Desktop\Repo\NVROrganizer\NVROrganizer.UI\obj\Debug\View\MeetingD
 C:\Users\berry\Desktop\Repo\NVROrganizer\NVROrganizer.UI\obj\Debug\View\MeetingDetailView.baml
 C:\Users\berry\Desktop\Repo\NVROrganizer\NVROrganizer.UI\obj\Debug\View\ProgrammingLanguageDetailView.g.cs
 C:\Users\berry\Desktop\Repo\NVROrganizer\NVROrganizer.UI\obj\Debug\View\ProgrammingLanguageDetailView.baml
+C:\Users\berry\Desktop\Repo\NVROrganizer\NVROrganizer.UI\bin\Debug\ControlzEx.dll
+C:\Users\berry\Desktop\Repo\NVROrganizer\NVROrganizer.UI\bin\Debug\MahApps.Metro.dll
+C:\Users\berry\Desktop\Repo\NVROrganizer\NVROrganizer.UI\bin\Debug\Microsoft.Xaml.Behaviors.dll
+C:\Users\berry\Desktop\Repo\NVROrganizer\NVROrganizer.UI\bin\Debug\ControlzEx.pdb
+C:\Users\berry\Desktop\Repo\NVROrganizer\NVROrganizer.UI\bin\Debug\ControlzEx.xml
+C:\Users\berry\Desktop\Repo\NVROrganizer\NVROrganizer.UI\bin\Debug\MahApps.Metro.pdb
+C:\Users\berry\Desktop\Repo\NVROrganizer\NVROrganizer.UI\bin\Debug\MahApps.Metro.xml
+C:\Users\berry\Desktop\Repo\NVROrganizer\NVROrganizer.UI\bin\Debug\Microsoft.Xaml.Behaviors.pdb
+C:\Users\berry\Desktop\Repo\NVROrganizer\NVROrganizer.UI\bin\Debug\Microsoft.Xaml.Behaviors.xml
+C:\Users\berry\Desktop\Repo\NVROrganizer\NVROrganizer.UI\bin\Debug\de\MahApps.Metro.resources.dll

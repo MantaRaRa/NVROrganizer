@@ -4,8 +4,17 @@
              xmlns:local="clr-namespace:NvrOrganizer.UI"
             Startup="Application_Startup"
              DispatcherUnhandledException="Application_DispatcherUnhandledException">
-    
+
     <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Dark.Crimson.xaml" />
+
+                <ResourceDictionary>
+                    
+                    
         <BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter"/>
         <Style TargetType="TextBox">
             <Setter Property="Validation.ErrorTemplate">
@@ -45,5 +54,8 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+            </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

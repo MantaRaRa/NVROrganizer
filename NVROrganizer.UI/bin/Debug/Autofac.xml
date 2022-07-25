@@ -1851,6 +1851,12 @@
             <param name="context">The current component context.</param>
             <returns>The bind result.</returns>
         </member>
+        <member name="M:Autofac.Core.Activators.Reflection.ConstructorBinder.GetConstructorInvoker">
+            <summary>
+            Get the constructor factory delegate.
+            </summary>
+            <remarks>Will return null if the constructor contains an invalid parameter.</remarks>
+        </member>
         <member name="T:Autofac.Core.Activators.Reflection.DefaultConstructorFinder">
             <summary>
             Finds constructors that match a finder function.
@@ -1922,6 +1928,29 @@
             <param name="parameters">Parameters to the instance being resolved.</param>
             <returns>The best constructor.</returns>
         </member>
+        <member name="T:Autofac.Core.Activators.Reflection.IConstructorSelectorWithEarlyBinding">
+            <summary>
+            Defines an interface that indicates a constructor selector can attempt to
+            determine the correct constructor early, as the container is built,
+            without needing to understand the set of parameters in each resolve.
+            </summary>
+        </member>
+        <member name="M:Autofac.Core.Activators.Reflection.IConstructorSelectorWithEarlyBinding.SelectConstructorBinder(Autofac.Core.Activators.Reflection.ConstructorBinder[])">
+            <summary>
+            Given the set of all found constructors for a registration, try and
+            select the correct single <see cref="T:Autofac.Core.Activators.Reflection.ConstructorBinder"/> to use.
+            </summary>
+            <param name="constructorBinders">
+            The set of binders for all constructors found by
+            <see cref="T:Autofac.Core.Activators.Reflection.IConstructorFinder"/> on the registration.
+            </param>
+            <returns>
+            The single, correct binder to use. If the method returns null, this
+            indicates the selector requires resolve-time parameters, and the default
+            <see cref="M:Autofac.Core.Activators.Reflection.IConstructorSelector.SelectConstructorBinding(Autofac.Core.Activators.Reflection.BoundConstructor[],System.Collections.Generic.IEnumerable{Autofac.Core.Parameter})"/> method will
+            be invoked.
+            </returns>
+        </member>
         <member name="T:Autofac.Core.Activators.Reflection.MatchingSignatureConstructorSelector">
             <summary>
             Selects a constructor based on its signature.
@@ -1939,6 +1968,13 @@
             </summary>
             <param name="constructorBindings">Available constructors.</param>
             <param name="parameters">Parameters to the instance being resolved.</param>
+            <returns>The best constructor.</returns>
+        </member>
+        <member name="M:Autofac.Core.Activators.Reflection.MatchingSignatureConstructorSelector.SelectConstructorBinder(Autofac.Core.Activators.Reflection.ConstructorBinder[])">
+            <summary>
+            Selects the best constructor from the available constructor bindings.
+            </summary>
+            <param name="constructorBinders">Available constructors.</param>
             <returns>The best constructor.</returns>
         </member>
         <member name="T:Autofac.Core.Activators.Reflection.MatchingSignatureConstructorSelectorResources">
@@ -2513,7 +2549,7 @@
         </member>
         <member name="P:Autofac.Core.DisposerResources.TypeOnlyImplementsIAsyncDisposable">
             <summary>
-              Looks up a localized string similar to AUTOFAC: A synchronous Dispose has been attempted, but the tracked object of type &apos;{0}&apos; only implements IAsyncDisposable. This will result in an efficient blocking dispose. Consider either implementing IDisposable on &apos;{0}&apos; or disposing of the scope/container with DisposeAsync..
+              Looks up a localized string similar to AUTOFAC: A synchronous Dispose has been attempted, but the tracked object of type &apos;{0}&apos; only implements IAsyncDisposable. This will result in an inefficient blocking dispose. Consider either implementing IDisposable on &apos;{0}&apos; or disposing of the scope/container with DisposeAsync..
             </summary>
         </member>
         <member name="T:Autofac.Core.IActivatedEventArgs`1">
@@ -4596,7 +4632,7 @@
             Use the specified piece of middleware in the service pipeline.
             </summary>
             <param name="middleware">The middleware.</param>
-            <param name="insertionMode">The inserton mode for the pipeline.</param>
+            <param name="insertionMode">The insertion mode for the pipeline.</param>
         </member>
         <member name="M:Autofac.Core.Registration.ServiceRegistrationInfo.UseServiceMiddlewareRange(System.Collections.Generic.IEnumerable{Autofac.Core.Resolving.Pipeline.IResolveMiddleware},Autofac.Core.Resolving.Pipeline.MiddlewareInsertionMode)">
             <summary>
@@ -4614,7 +4650,7 @@
         </member>
         <member name="P:Autofac.Core.Registration.ServiceRegistrationInfo.IsInitializing">
             <summary>
-            Gets a value indicating whether this service info is initialising.
+            Gets a value indicating whether this service info is initializing.
             </summary>
         </member>
         <member name="P:Autofac.Core.Registration.ServiceRegistrationInfo.HasSourcesToQuery">
@@ -4624,7 +4660,7 @@
         </member>
         <member name="M:Autofac.Core.Registration.ServiceRegistrationInfo.BeginInitialization(System.Collections.Generic.IEnumerable{Autofac.Core.IRegistrationSource})">
             <summary>
-            Begin the initialisation process for this service info, given the set of dynamic sources.
+            Begin the initialization process for this service info, given the set of dynamic sources.
             </summary>
             <param name="sources">The set of sources.</param>
         </member>
@@ -4642,7 +4678,7 @@
         </member>
         <member name="M:Autofac.Core.Registration.ServiceRegistrationInfo.CompleteInitialization">
             <summary>
-            Complete initialisation of the service info.
+            Complete initialization of the service info.
             </summary>
         </member>
         <member name="M:Autofac.Core.Registration.ServiceRegistrationInfo.ToString">
@@ -4843,6 +4879,36 @@
             </summary>
             <param name="activator">The activator instance.</param>
             <returns>A display name.</returns>
+        </member>
+        <member name="T:Autofac.Core.Resolving.BaseGenericResolveDelegateInvoker">
+            <summary>
+            Provides a base implementation for the dynamically generated DelegateInvoker classes.
+            </summary>
+            <remarks>
+            See Autofac.CodeGen.DelegateRegisterGenerator.
+            </remarks>
+        </member>
+        <member name="M:Autofac.Core.Resolving.BaseGenericResolveDelegateInvoker.GetDelegateParameters">
+            <summary>
+            Method implemented by the derived generated class to get the <see cref="T:System.Reflection.ParameterInfo"/> array for the owned delegate.
+            </summary>
+        </member>
+        <member name="M:Autofac.Core.Resolving.BaseGenericResolveDelegateInvoker.ResolveWithParametersOrRegistration``1(Autofac.IComponentContext,System.Collections.Generic.IEnumerable{Autofac.Core.Parameter},System.Int32)">
+            <summary>
+            Resolve the specified type parameter either from the currently-in-scope
+            resolve parameters, or as a regular dependency.
+            </summary>
+            <typeparam name="T">The type to resolve.</typeparam>
+            <param name="context">The context from which to resolve.</param>
+            <param name="parameters">The set of Autofac resolve parameters.</param>
+            <param name="parameterInfoPosition">The position of the parameter in the
+            delegate's parameter info set.</param>
+        </member>
+        <member name="M:Autofac.Core.Resolving.BaseGenericResolveDelegateInvoker.AnyParameters(System.Collections.Generic.IEnumerable{Autofac.Core.Parameter})">
+            <summary>
+            Checks whether there are any parameters in the set of parameters.
+            </summary>
+            <param name="parameters">The parameters.</param>
         </member>
         <member name="T:Autofac.Core.Resolving.ComponentActivationResources">
             <summary>
@@ -5961,6 +6027,11 @@
         <member name="P:Autofac.Core.Resolving.SegmentedStackResources.EnumeratorNotValid">
             <summary>
               Looks up a localized string similar to Enumerator not in valid state..
+            </summary>
+        </member>
+        <member name="T:Autofac.Core.Resolving.DelegateInvokers">
+            <summary>
+            Provides delegate invocation holding classes.
             </summary>
         </member>
         <member name="T:Autofac.Core.Pipeline.ResolvePipeline">
@@ -8767,27 +8838,6 @@
             <param name="serviceKeyMapping">A function to determine the service key for a given type.</param>
             <returns>The registration builder.</returns>
         </member>
-        <member name="M:Autofac.Features.Scanning.ScanningRegistrationExtensions.WithMetadata``2(Autofac.Builder.IRegistrationBuilder{``0,Autofac.Features.Scanning.OpenGenericScanningActivatorData,``1},System.Func{System.Type,System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.Object}}})">
-            <summary>
-            Specify how an open generic type from a scanned assembly provides metadata.
-            </summary>
-            <typeparam name="TLimit">Registration limit type.</typeparam>
-            <typeparam name="TRegistrationStyle">Registration style.</typeparam>
-            <param name="registration">Registration to set metadata on.</param>
-            <param name="metadataMapping">A function mapping the type to a list of metadata items.</param>
-            <returns>Registration builder allowing the registration to be configured.</returns>
-        </member>
-        <member name="M:Autofac.Features.Scanning.ScanningRegistrationExtensions.WithMetadataFrom``1(Autofac.Builder.IRegistrationBuilder{System.Object,Autofac.Features.Scanning.OpenGenericScanningActivatorData,Autofac.Builder.DynamicRegistrationStyle})">
-            <summary>
-            Use the properties of an attribute (or interface implemented by an attribute) on the scanned type
-            to provide metadata values.
-            </summary>
-            <remarks>Inherited attributes are supported; however, there must be at most one matching attribute
-            in the inheritance chain.</remarks>
-            <typeparam name="TAttribute">The attribute applied to the scanned type.</typeparam>
-            <param name="registration">Registration to set metadata on.</param>
-            <returns>Registration builder allowing the registration to be configured.</returns>
-        </member>
         <member name="M:Autofac.Features.Scanning.ScanningRegistrationExtensions.RegisterAssemblyTypes(Autofac.ContainerBuilder,System.Reflection.Assembly[])">
             <summary>
             Register types from the specified assemblies.
@@ -9671,6 +9721,9 @@
             </summary>
         </member>
         <member name="T:Autofac.RegistrationExtensions">
+            <summary>
+            Adds registration syntax to the <see cref="T:Autofac.ContainerBuilder"/> type.
+            </summary>
             <summary>
             Adds registration syntax to the <see cref="T:Autofac.ContainerBuilder"/> type.
             </summary>
@@ -10788,6 +10841,317 @@
             <param name="registration">Registration to set service mapping on.</param>
             <returns>Registration builder allowing the registration to be configured.</returns>
         </member>
+        <member name="M:Autofac.RegistrationExtensions.WithMetadata``2(Autofac.Builder.IRegistrationBuilder{``0,Autofac.Features.Scanning.OpenGenericScanningActivatorData,``1},System.Func{System.Type,System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.Object}}})">
+            <summary>
+            Specify how a type from a scanned assembly provides metadata.
+            </summary>
+            <typeparam name="TLimit">Registration limit type.</typeparam>
+            <typeparam name="TRegistrationStyle">Registration style.</typeparam>
+            <param name="registration">Registration to set metadata on.</param>
+            <param name="metadataMapping">A function mapping the type to a list of metadata items.</param>
+            <returns>Registration builder allowing the registration to be configured.</returns>
+        </member>
+        <member name="M:Autofac.RegistrationExtensions.WithMetadataFrom``1(Autofac.Builder.IRegistrationBuilder{System.Object,Autofac.Features.Scanning.OpenGenericScanningActivatorData,Autofac.Builder.DynamicRegistrationStyle})">
+            <summary>
+            Use the properties of an attribute (or interface implemented by an attribute) on the scanned type
+            to provide metadata values.
+            </summary>
+            <remarks>Inherited attributes are supported; however, there must be at most one matching attribute
+            in the inheritance chain.</remarks>
+            <typeparam name="TAttribute">The attribute applied to the scanned type.</typeparam>
+            <param name="registration">Registration to set metadata on.</param>
+            <returns>Registration builder allowing the registration to be configured.</returns>
+        </member>
+        <member name="M:Autofac.RegistrationExtensions.Register``2(Autofac.ContainerBuilder,System.Func{``0,``1})">
+            <summary>
+            Register a delegate as a component.
+            </summary>
+            <typeparam name="TDependency1">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TComponent">The type of the instance.</typeparam>
+            <param name="builder">Container builder.</param>
+            <param name="delegate">The delegate to register.</param>
+            <returns>Registration builder allowing the registration to be configured.</returns>
+        </member>
+        <member name="M:Autofac.RegistrationExtensions.Register``2(Autofac.ContainerBuilder,System.Func{Autofac.IComponentContext,``0,``1})">
+            <summary>
+            Register a delegate as a component.
+            </summary>
+            <typeparam name="TDependency1">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TComponent">The type of the instance.</typeparam>
+            <param name="builder">Container builder.</param>
+            <param name="delegate">The delegate to register.</param>
+            <returns>Registration builder allowing the registration to be configured.</returns>
+        </member>
+        <member name="M:Autofac.RegistrationExtensions.Register``3(Autofac.ContainerBuilder,System.Func{``0,``1,``2})">
+            <summary>
+            Register a delegate as a component.
+            </summary>
+            <typeparam name="TDependency1">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency2">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TComponent">The type of the instance.</typeparam>
+            <param name="builder">Container builder.</param>
+            <param name="delegate">The delegate to register.</param>
+            <returns>Registration builder allowing the registration to be configured.</returns>
+        </member>
+        <member name="M:Autofac.RegistrationExtensions.Register``3(Autofac.ContainerBuilder,System.Func{Autofac.IComponentContext,``0,``1,``2})">
+            <summary>
+            Register a delegate as a component.
+            </summary>
+            <typeparam name="TDependency1">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency2">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TComponent">The type of the instance.</typeparam>
+            <param name="builder">Container builder.</param>
+            <param name="delegate">The delegate to register.</param>
+            <returns>Registration builder allowing the registration to be configured.</returns>
+        </member>
+        <member name="M:Autofac.RegistrationExtensions.Register``4(Autofac.ContainerBuilder,System.Func{``0,``1,``2,``3})">
+            <summary>
+            Register a delegate as a component.
+            </summary>
+            <typeparam name="TDependency1">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency2">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency3">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TComponent">The type of the instance.</typeparam>
+            <param name="builder">Container builder.</param>
+            <param name="delegate">The delegate to register.</param>
+            <returns>Registration builder allowing the registration to be configured.</returns>
+        </member>
+        <member name="M:Autofac.RegistrationExtensions.Register``4(Autofac.ContainerBuilder,System.Func{Autofac.IComponentContext,``0,``1,``2,``3})">
+            <summary>
+            Register a delegate as a component.
+            </summary>
+            <typeparam name="TDependency1">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency2">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency3">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TComponent">The type of the instance.</typeparam>
+            <param name="builder">Container builder.</param>
+            <param name="delegate">The delegate to register.</param>
+            <returns>Registration builder allowing the registration to be configured.</returns>
+        </member>
+        <member name="M:Autofac.RegistrationExtensions.Register``5(Autofac.ContainerBuilder,System.Func{``0,``1,``2,``3,``4})">
+            <summary>
+            Register a delegate as a component.
+            </summary>
+            <typeparam name="TDependency1">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency2">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency3">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency4">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TComponent">The type of the instance.</typeparam>
+            <param name="builder">Container builder.</param>
+            <param name="delegate">The delegate to register.</param>
+            <returns>Registration builder allowing the registration to be configured.</returns>
+        </member>
+        <member name="M:Autofac.RegistrationExtensions.Register``5(Autofac.ContainerBuilder,System.Func{Autofac.IComponentContext,``0,``1,``2,``3,``4})">
+            <summary>
+            Register a delegate as a component.
+            </summary>
+            <typeparam name="TDependency1">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency2">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency3">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency4">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TComponent">The type of the instance.</typeparam>
+            <param name="builder">Container builder.</param>
+            <param name="delegate">The delegate to register.</param>
+            <returns>Registration builder allowing the registration to be configured.</returns>
+        </member>
+        <member name="M:Autofac.RegistrationExtensions.Register``6(Autofac.ContainerBuilder,System.Func{``0,``1,``2,``3,``4,``5})">
+            <summary>
+            Register a delegate as a component.
+            </summary>
+            <typeparam name="TDependency1">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency2">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency3">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency4">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency5">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TComponent">The type of the instance.</typeparam>
+            <param name="builder">Container builder.</param>
+            <param name="delegate">The delegate to register.</param>
+            <returns>Registration builder allowing the registration to be configured.</returns>
+        </member>
+        <member name="M:Autofac.RegistrationExtensions.Register``6(Autofac.ContainerBuilder,System.Func{Autofac.IComponentContext,``0,``1,``2,``3,``4,``5})">
+            <summary>
+            Register a delegate as a component.
+            </summary>
+            <typeparam name="TDependency1">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency2">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency3">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency4">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency5">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TComponent">The type of the instance.</typeparam>
+            <param name="builder">Container builder.</param>
+            <param name="delegate">The delegate to register.</param>
+            <returns>Registration builder allowing the registration to be configured.</returns>
+        </member>
+        <member name="M:Autofac.RegistrationExtensions.Register``7(Autofac.ContainerBuilder,System.Func{``0,``1,``2,``3,``4,``5,``6})">
+            <summary>
+            Register a delegate as a component.
+            </summary>
+            <typeparam name="TDependency1">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency2">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency3">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency4">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency5">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency6">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TComponent">The type of the instance.</typeparam>
+            <param name="builder">Container builder.</param>
+            <param name="delegate">The delegate to register.</param>
+            <returns>Registration builder allowing the registration to be configured.</returns>
+        </member>
+        <member name="M:Autofac.RegistrationExtensions.Register``7(Autofac.ContainerBuilder,System.Func{Autofac.IComponentContext,``0,``1,``2,``3,``4,``5,``6})">
+            <summary>
+            Register a delegate as a component.
+            </summary>
+            <typeparam name="TDependency1">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency2">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency3">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency4">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency5">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency6">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TComponent">The type of the instance.</typeparam>
+            <param name="builder">Container builder.</param>
+            <param name="delegate">The delegate to register.</param>
+            <returns>Registration builder allowing the registration to be configured.</returns>
+        </member>
+        <member name="M:Autofac.RegistrationExtensions.Register``8(Autofac.ContainerBuilder,System.Func{``0,``1,``2,``3,``4,``5,``6,``7})">
+            <summary>
+            Register a delegate as a component.
+            </summary>
+            <typeparam name="TDependency1">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency2">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency3">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency4">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency5">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency6">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency7">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TComponent">The type of the instance.</typeparam>
+            <param name="builder">Container builder.</param>
+            <param name="delegate">The delegate to register.</param>
+            <returns>Registration builder allowing the registration to be configured.</returns>
+        </member>
+        <member name="M:Autofac.RegistrationExtensions.Register``8(Autofac.ContainerBuilder,System.Func{Autofac.IComponentContext,``0,``1,``2,``3,``4,``5,``6,``7})">
+            <summary>
+            Register a delegate as a component.
+            </summary>
+            <typeparam name="TDependency1">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency2">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency3">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency4">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency5">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency6">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency7">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TComponent">The type of the instance.</typeparam>
+            <param name="builder">Container builder.</param>
+            <param name="delegate">The delegate to register.</param>
+            <returns>Registration builder allowing the registration to be configured.</returns>
+        </member>
+        <member name="M:Autofac.RegistrationExtensions.Register``9(Autofac.ContainerBuilder,System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8})">
+            <summary>
+            Register a delegate as a component.
+            </summary>
+            <typeparam name="TDependency1">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency2">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency3">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency4">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency5">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency6">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency7">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency8">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TComponent">The type of the instance.</typeparam>
+            <param name="builder">Container builder.</param>
+            <param name="delegate">The delegate to register.</param>
+            <returns>Registration builder allowing the registration to be configured.</returns>
+        </member>
+        <member name="M:Autofac.RegistrationExtensions.Register``9(Autofac.ContainerBuilder,System.Func{Autofac.IComponentContext,``0,``1,``2,``3,``4,``5,``6,``7,``8})">
+            <summary>
+            Register a delegate as a component.
+            </summary>
+            <typeparam name="TDependency1">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency2">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency3">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency4">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency5">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency6">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency7">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency8">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TComponent">The type of the instance.</typeparam>
+            <param name="builder">Container builder.</param>
+            <param name="delegate">The delegate to register.</param>
+            <returns>Registration builder allowing the registration to be configured.</returns>
+        </member>
+        <member name="M:Autofac.RegistrationExtensions.Register``10(Autofac.ContainerBuilder,System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9})">
+            <summary>
+            Register a delegate as a component.
+            </summary>
+            <typeparam name="TDependency1">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency2">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency3">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency4">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency5">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency6">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency7">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency8">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency9">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TComponent">The type of the instance.</typeparam>
+            <param name="builder">Container builder.</param>
+            <param name="delegate">The delegate to register.</param>
+            <returns>Registration builder allowing the registration to be configured.</returns>
+        </member>
+        <member name="M:Autofac.RegistrationExtensions.Register``10(Autofac.ContainerBuilder,System.Func{Autofac.IComponentContext,``0,``1,``2,``3,``4,``5,``6,``7,``8,``9})">
+            <summary>
+            Register a delegate as a component.
+            </summary>
+            <typeparam name="TDependency1">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency2">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency3">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency4">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency5">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency6">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency7">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency8">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency9">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TComponent">The type of the instance.</typeparam>
+            <param name="builder">Container builder.</param>
+            <param name="delegate">The delegate to register.</param>
+            <returns>Registration builder allowing the registration to be configured.</returns>
+        </member>
+        <member name="M:Autofac.RegistrationExtensions.Register``11(Autofac.ContainerBuilder,System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10})">
+            <summary>
+            Register a delegate as a component.
+            </summary>
+            <typeparam name="TDependency1">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency2">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency3">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency4">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency5">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency6">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency7">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency8">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency9">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency10">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TComponent">The type of the instance.</typeparam>
+            <param name="builder">Container builder.</param>
+            <param name="delegate">The delegate to register.</param>
+            <returns>Registration builder allowing the registration to be configured.</returns>
+        </member>
+        <member name="M:Autofac.RegistrationExtensions.Register``11(Autofac.ContainerBuilder,System.Func{Autofac.IComponentContext,``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10})">
+            <summary>
+            Register a delegate as a component.
+            </summary>
+            <typeparam name="TDependency1">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency2">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency3">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency4">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency5">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency6">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency7">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency8">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency9">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TDependency10">The type of a dependency to inject into the delegate.</typeparam>
+            <typeparam name="TComponent">The type of the instance.</typeparam>
+            <param name="builder">Container builder.</param>
+            <param name="delegate">The delegate to register.</param>
+            <returns>Registration builder allowing the registration to be configured.</returns>
+        </member>
         <member name="T:Autofac.RegistrationExtensionsResources">
             <summary>
               A strongly-typed resource class, for looking up localized strings, etc.
@@ -11751,6 +12115,11 @@
         <member name="T:Autofac.ResolveRequest">
             <summary>
             The details of an individual request to resolve a service.
+            </summary>
+        </member>
+        <member name="F:Autofac.ResolveRequest.NoParameters">
+            <summary>
+            Shared constant value defining an empty set of parameters.
             </summary>
         </member>
         <member name="M:Autofac.ResolveRequest.#ctor(Autofac.Core.Service,Autofac.Core.ServiceRegistration,System.Collections.Generic.IEnumerable{Autofac.Core.Parameter},Autofac.Core.IComponentRegistration)">

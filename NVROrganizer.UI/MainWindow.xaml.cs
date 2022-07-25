@@ -1,9 +1,10 @@
-﻿using NvrOrganizer.UI.ViewModel;
+﻿using MahApps.Metro.Controls;
+using NvrOrganizer.UI.ViewModel;
 using System.Windows;
 
 namespace NvrOrganizer.UI
 {
-    public partial class MainWindow : Window
+    public partial class MainWindow : MetroWindow
     {
         private MainViewModel _viewModel;
 
