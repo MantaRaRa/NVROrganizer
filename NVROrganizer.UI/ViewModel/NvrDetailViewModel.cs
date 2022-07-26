@@ -188,11 +188,11 @@ namespace NvrOrganizer.UI.ViewModel
         {
             if (await _nvrRepository.HasMeetingsAsync(Nvr.Id))
             {
-                MessageDialogService.ShowInfoDialog($"{Nvr.FirstName} {Nvr.LastName} can't be deleted, as this NVR is part of at least one meeting");
+                await MessageDialogService.ShowInfoDialogAsync($"{Nvr.FirstName} {Nvr.LastName} can't be deleted, as this NVR is part of at least one meeting");
                 return;
             }
 
-            var result = MessageDialogService.ShowOKCancelDialog($"Do you really want to delete the selected NVR {Nvr.FirstName} {Nvr.LastName}?",
+            var result = await MessageDialogService.ShowOKCancelDialogAsync($"Do you really want to delete the selected NVR {Nvr.FirstName} {Nvr.LastName}?",
                "Question");
             if(result == MessageDialogResult.OK)
             { 

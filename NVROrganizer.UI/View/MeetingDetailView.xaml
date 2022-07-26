@@ -46,7 +46,9 @@
 
             <Label Content="Added Nvrs"/>
             <ListView Grid.Row="1" ItemsSource="{Binding AddedNvrs}"
-                SelectedItem="{Binding SelectedAddedNvr}"/>
+                SelectedItem="{Binding SelectedAddedNvr}"
+                      BorderThickness="0 1 0 0 "/>
+            
 
             <StackPanel Grid.Row="1" Grid.Column="1">
                 <Button Content="&lt;&lt;" Margin="10" Command="{Binding AddNvrCommand}"/>
@@ -55,7 +57,8 @@
 
             <Label Content="Available Nvrs" Grid.Column="2"/>
             <ListView Grid.Row="1" ItemsSource="{Binding AvailableNvrs}"
-                SelectedItem="{Binding SelectedAvailableNvr}" Grid.Column="2"/>
+                SelectedItem="{Binding SelectedAvailableNvr}" Grid.Column="2"
+                      BorderThickness="0 1 0 0 "/>
         </Grid>
 
         <StackPanel Grid.Row="7" Orientation="Horizontal">

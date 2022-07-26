@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,26 +9,28 @@ using System.Windows;
 
 namespace NvrOrganizer.UI.View.Services
 {
-    public class MessageDialogService : IMessageDialogService
+ 
+  public class MessageDialogService : IMessageDialogService
     {
-        public MessageDialogResult ShowOKCancelDialog(string text, string title)
+        private MetroWindow MetroWindow => (MetroWindow)App.Current.MainWindow;
+        public async Task<MessageDialogResult> ShowOKCancelDialogAsync(string text, string title)
         {
-            var result = MessageBox.Show(text, title, MessageBoxButton.OKCancel);
-            return result == MessageBoxResult.OK
-                ? MessageDialogResult.OK
-                : MessageDialogResult.Cancel;
-        }
+            var result =
+              await MetroWindow.ShowMessageAsync(title, text, MessageDialogStyle.AffirmativeAndNegative);
 
-        public void ShowInfoDialog(string text)
+            return result == MahApps.Metro.Controls.Dialogs.MessageDialogResult.Affirmative
+              ? MessageDialogResult.OK
+              : MessageDialogResult.Cancel;
+        }
+        public async Task ShowInfoDialogAsync(string text)
         {
-            MessageBox.Show(text, "Info");
+            await MetroWindow.ShowMessageAsync("Info", text);
         }
 
     }
-
     public enum MessageDialogResult
     {
         OK,
-        Cancel,
+        Cancel
     }
 }
