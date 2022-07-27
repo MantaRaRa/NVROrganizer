@@ -1,8 +1,8 @@
 # NVROrganizer
 
-Version 2.0 attributes:
+##Version 2.0 attributes:
 
-This WPF Enterprise App with MVVM is a Vampped up version of the NVR Organizer V1.0, it incudes:
+###This WPF Enterprise App with MVVM is a Vampped up version of the NVR Organizer V1.0, it incudes:
 
 -Setting up a DataBase with Entity Framework Code 1st
 
@@ -26,7 +26,7 @@ This WPF Enterprise App with MVVM is a Vampped up version of the NVR Organizer V
 
 
 
-Version 1.0 attributes:
+##Version 1.0 attributes:
 
 The App retrieves the clients First name, Last Name and the requried Alias from a Local DataBase, clicking on the Left Navagation will populate the data on the right side.
 
@@ -48,4 +48,4 @@ confirm the delete action.
 As the DataBase gets bigger the code uses the LoadAsync Properties to keep the App Responsive by only loading the necessary information to help with the 
 computers Memory usage.
 
-Special Thanks to Thomas Claudius Huber and Ernesto Ramos for their Contributions.
+#Special Thanks to Thomas Claudius Huber and Ernesto Ramos for their Contributions.
