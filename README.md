@@ -1,8 +1,8 @@
 # NVROrganizer
 
-##Version 2.0 attributes:
+## Version 2.0 attributes:
 
-###This WPF Enterprise App with MVVM is a Vampped up version of the NVR Organizer V1.0, it incudes:
+### This WPF Enterprise App with MVVM is a Vampped up version of the NVR Organizer V1.0, it incudes:
 
 -Setting up a DataBase with Entity Framework Code 1st
 
