@@ -24,7 +24,7 @@
 
  ### Special instructions required for the reviewer:
  
-*Please Build it, if successful, Select NVROrganizer.DataAccess as the Default Project than ''' Update-Database ''' in the Package Manager Console*
+*Please Build it, if successful, Select NVROrganizer.DataAccess as the Default Project than '''Update-Database''' in the Package Manager Console*
 
 *Worst case Scenario:*
 
