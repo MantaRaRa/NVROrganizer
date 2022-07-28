@@ -26,16 +26,18 @@
  
 *Please Build it, if successful, Select NVROrganizer.DataAccess as the Default Project than ''' Update-Database ''' in the Package Manager Console*
 
-*Worst case Scenario:
+*Worst case Scenario:*
 
-Delete all Migrations (except Configuration.cs), located in the Migrations folder under the NVROrganizer.UI folder.
+Delete all Migrations (except Configuration.cs), located in the Migrations folder under the NVROrganizer.UI Solution from the Solution Explorer
+
 ### Go to the Package Manger Console Tab and add these Migrations:
+
 - Add-Migration InitialDatabase  (Wait for it to seed)
 - Add-Migration AddedNvrPhoneNumbers  (Wait for it to seed)
 - Add-Migration AddedMeetings  (Wait for it to seed)
 - Add-Migration AddedProgrammingLanguage  (Wait for it to seed)
 - Add-Migration AddedRowVersionToNvr  (Wait for it to seed)
-- Update-Database*
+- Update-Database
 
 
 
