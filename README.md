@@ -22,8 +22,8 @@
 
 - Modern dark design (Mahapps.Metro for Styling)
 
- ### *Special instructions required for the reviewer:
-Please Build it, if successful, Update-Database in the Package Manager Console*
+ ### Special instructions required for the reviewer:
+*Please Build it, if successful, Update-Database in the Package Manager Console*
 
 
 
