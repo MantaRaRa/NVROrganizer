@@ -38,8 +38,7 @@ Delete all Migrations (except Configuration.cs), located in the Migrations folde
 - ``` Add-Migration AddedProgrammingLanguage ```  *(Wait for it to seed)*
 - ``` Add-Migration AddedRowVersionToNvr ```      *(Wait for it to seed)*
 - ``` Update-Database ```                         *(Wait for it to seed)*
-- 
- ### Run the Application
+- ### Run the Application
 
 
 
