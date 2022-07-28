@@ -4,25 +4,26 @@
 
 ### This WPF Enterprise App with MVVM is a Vampped up version of the NVR Organizer V1.0, it incudes:
 
--Setting up a DataBase with Entity Framework Code 1st
+- Setting up a DataBase with Entity Framework Code 1st
 
--Detecting Model changes with Entity Framework db. Context
+- Detecting Model changes with Entity Framework db. Context
 
--Validating User Input with Data Annotations and INotifyDataErrorInfo
+- Validating User Input with Data Annotations and INotifyDataErrorInfo
 
--Implementing Optimistic Concurrency to handle Multi-User Conflicts (DataBase Wins Vs. User Wins)
+- Implementing Optimistic Concurrency to handle Multi-User Conflicts (DataBase Wins Vs. User Wins)
 
 -Implemented Communication between ViewModels with Prism's EventAggregator
 
--Tabbed User Interface 
+- Tabbed User Interface 
 
--A Drop down menu to add the Program that is used to access the NVRs and a way to Edit the list 
+- A Drop down menu to add the Program that is used to access the NVRs and a way to Edit the list 
 
--Added a Section to create appointments that displays a Calendar and PickList
+- Added a Section to create appointments that displays a Calendar and PickList
 
--Modern dark design (Mahapps.Metro for Styling)
+- Modern dark design (Mahapps.Metro for Styling)
 
-*Special instructions required for the reviewer, Please Update-Database in the Package Manager Console*
+*Special instructions required for the reviewer:
+Please Build it, if successful, Update-Database in the Package Manager Console*
 
 
 
