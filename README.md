@@ -29,7 +29,7 @@
 *Worst case Scenario:
 
 Delete all Migrations (except Configuration.cs), located in the Migrations folder under the NVROrganizer.UI folder.
-- Go to the Package Manger Console Tab and add these Migrations:
+### Go to the Package Manger Console Tab and add these Migrations:
 - Add-Migration InitialDatabase  (Wait for it to seed)
 - Add-Migration AddedNvrPhoneNumbers  (Wait for it to seed)
 - Add-Migration AddedMeetings  (Wait for it to seed)
