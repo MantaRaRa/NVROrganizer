@@ -23,7 +23,7 @@
 - Modern dark design (Mahapps.Metro for Styling)
 
  ### Special instructions required for the reviewer:
-*Please Build it, if successful, Update-Database in the Package Manager Console*
+*Please Build it, if successful, Select NVROrganizer.DataAccess as the Default Project than ''' Update-Database ''' in the Package Manager Console*
 
 
 
