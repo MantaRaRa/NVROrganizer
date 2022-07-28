@@ -12,7 +12,7 @@
 
 - Implementing Optimistic Concurrency to handle Multi-User Conflicts (DataBase Wins Vs. User Wins)
 
--Implemented Communication between ViewModels with Prism's EventAggregator
+- Implemented Communication between ViewModels with Prism's EventAggregator
 
 - Tabbed User Interface 
 
@@ -22,7 +22,7 @@
 
 - Modern dark design (Mahapps.Metro for Styling)
 
-*Special instructions required for the reviewer:
+ ### *Special instructions required for the reviewer:
 Please Build it, if successful, Update-Database in the Package Manager Console*
 
 
