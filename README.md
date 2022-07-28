@@ -32,12 +32,12 @@ Delete all Migrations (except Configuration.cs), located in the Migrations folde
 
 ### Go to the Package Manger Console Tab and add these Migrations:
 
-- Add-Migration InitialDatabase  (Wait for it to seed)
-- Add-Migration AddedNvrPhoneNumbers  (Wait for it to seed)
-- Add-Migration AddedMeetings  (Wait for it to seed)
-- Add-Migration AddedProgrammingLanguage  (Wait for it to seed)
-- Add-Migration AddedRowVersionToNvr  (Wait for it to seed)
-- Update-Database
+- ``` Add-Migration InitialDatabase ```  (Wait for it to seed)
+- ``` Add-Migration AddedNvrPhoneNumbers ```  (Wait for it to seed)
+- ``` Add-Migration AddedMeetings ```  (Wait for it to seed)
+- ``` Add-Migration AddedProgrammingLanguage ```  (Wait for it to seed)
+- ``` Add-Migration AddedRowVersionToNvr ```  (Wait for it to seed)
+- ``` Update-Database ```
 
 
 
