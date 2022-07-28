@@ -65,4 +65,4 @@ confirm the delete action.
 As the DataBase gets bigger the code uses the LoadAsync Properties to keep the App Responsive by only loading the necessary information to help with the 
 computers Memory usage.
 
-## Special Thanks to Thomas Claudius Huber and Ernesto Ramos for their Contributions.
+## Special Thanks to *Thomas Claudius Huber* and *Ernesto Ramos* for their Contributions.
