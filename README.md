@@ -26,9 +26,9 @@
  
 *Please Build it, if successful, Select NVROrganizer.DataAccess as the Default Project than 
 
-,,,
+\\\
 update-Database 
-,,,
+\\\
 
 in the Package Manager Console*
 
