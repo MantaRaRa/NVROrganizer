@@ -1,14 +1,49 @@
 # NVROrganizer
 
-Version 2.0 attributes:
+## Version 2.0 attributes:
 
-This App is a Vampped up version of the NVR Organizer,
+### This WPF Enterprise App with MVVM is a Vampped up version of the NVR Organizer V1.0, it incudes:
+
+- Setting up a DataBase with Entity Framework Code 1st
+
+- Detecting Model changes with Entity Framework db. Context
+
+- Validating User Input with Data Annotations and INotifyDataErrorInfo
+
+- Implementing Optimistic Concurrency to handle Multi-User Conflicts (DataBase Wins Vs. User Wins)
+
+- Implemented Communication between ViewModels with Prism's EventAggregator
+
+- Tabbed User Interface 
+
+- A Drop down menu to add the Program that is used to access the NVRs and a way to Edit the list 
+
+- Added a Section to create appointments that displays a Calendar and PickList
+
+- Modern dark design (Mahapps.Metro for Styling)
+
+ ### Special instructions required for the reviewer:
+ 
+*Please Build it, if successful, Select NVROrganizer.DataAccess as the Default Project than ``` update-Database ``` in the Package Manager Console*
+
+*Worst case Scenario:*
+
+Delete all Migrations (except Configuration.cs), located in the Migrations folder under the NVROrganizer.UI Solution from the Solution Explorer
+
+### Go to the Package Manger Console Tab and add these Migrations:
+
+- ``` Add-Migration InitialDatabase ```           *(Wait for it to seed)*
+- ``` Add-Migration AddedNvrPhoneNumbers ```      *(Wait for it to seed)*
+- ``` Add-Migration AddedMeetings ```             *(Wait for it to seed)*
+- ``` Add-Migration AddedProgrammingLanguage ```  *(Wait for it to seed)*
+- ``` Add-Migration AddedRowVersionToNvr ```      *(Wait for it to seed)*
+- ``` Update-Database ```                         *(Run this code after each Migrations & Wait for it to seed)*
+- Run the Application
 
 
 
 
-
-Version 1.0 attributes:
+## Version 1.0 attributes:
 
 The App retrieves the clients First name, Last Name and the requried Alias from a Local DataBase, clicking on the Left Navagation will populate the data on the right side.
 
@@ -30,4 +65,4 @@ confirm the delete action.
 As the DataBase gets bigger the code uses the LoadAsync Properties to keep the App Responsive by only loading the necessary information to help with the 
 computers Memory usage.
 
-Special Thanks to Thomas Claudius Huber and Ernesto Ramos for their Contributions.
+### Special Thanks to *Thomas Claudius Huber* and *Ernesto Ramos* for their Contributions.
