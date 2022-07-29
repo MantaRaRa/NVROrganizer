@@ -33,6 +33,7 @@ To fix it:
 - Then deleted all the migrations.
 - Run ``` add-migration InitialDatabase ``` to create a new migration with all the database changes.
 - Run ``` update-database ```
+- Run the Application
 
 
 ### *Worst case Scenario:*
