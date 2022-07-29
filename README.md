@@ -37,7 +37,7 @@ Delete all Migrations (except Configuration.cs), located in the Migrations folde
 - ``` Add-Migration AddedMeetings ```             *(Wait for it to seed)*
 - ``` Add-Migration AddedProgrammingLanguage ```  *(Wait for it to seed)*
 - ``` Add-Migration AddedRowVersionToNvr ```      *(Wait for it to seed)*
-- ``` Update-Database ```                         *(Wait for it to seed)*
+- ``` Update-Database ```                         *(Run this code after each Migrations & Wait for it to seed)*
 - Run the Application
 
 
