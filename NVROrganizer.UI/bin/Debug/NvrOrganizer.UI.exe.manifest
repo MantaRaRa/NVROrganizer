@@ -138,14 +138,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="NvrOrganizer.DataAccess.dll" size="34816">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="NvrOrganizer.DataAccess.dll" size="36352">
       <assemblyIdentity name="NvrOrganizer.DataAccess" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>RBD/PDBLx/MxnmKxFh6guyHc1kVfPMxu5FG/ywc589M=</dsig:DigestValue>
+        <dsig:DigestValue>F1jgYJPze6rNdpmpYwMZn2dWRei76KWOp5ZSTytX5LE=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
