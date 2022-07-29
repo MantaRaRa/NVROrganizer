@@ -42,10 +42,11 @@ Delete all Migrations (except Configuration.cs), located in the Migrations folde
 
 ## Ernesto's Way:
 
-To fix it, run ``` update-database -Target 0 ``` to rollback all the migrations.
-Then deleted all the migrations.
-Run ``` add-migration InitialDatabase ``` to create a new migration with all the database changes.
-Run ``` update-database ```
+To fix it:
+- run ``` update-database -Target 0 ``` to rollback all the migrations.
+- Then deleted all the migrations.
+- Run ``` add-migration InitialDatabase ``` to create a new migration with all the database changes.
+- Run ``` update-database ```
 
 
 ## Version 1.0 attributes:
