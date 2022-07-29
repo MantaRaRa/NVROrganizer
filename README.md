@@ -26,7 +26,16 @@
  
 *Please Build it, if successful, Select NVROrganizer.DataAccess as the Default Project than ``` update-Database ``` in the Package Manager Console*
 
-*Worst case Scenario:*
+## Ernesto's Way:
+
+To fix it:
+- run ``` update-database -Target 0 ``` to rollback all the migrations.
+- Then deleted all the migrations.
+- Run ``` add-migration InitialDatabase ``` to create a new migration with all the database changes.
+- Run ``` update-database ```
+
+
+## *Worst case Scenario:*
 
 Delete all Migrations (except Configuration.cs), located in the Migrations folder under the NVROrganizer.UI Solution from the Solution Explorer
 
@@ -40,13 +49,6 @@ Delete all Migrations (except Configuration.cs), located in the Migrations folde
 - ``` Update-Database ```                         *(Run this code after each Migrations & Wait for it to seed)*
 - Run the Application
 
-## Ernesto's Way:
-
-To fix it:
-- run ``` update-database -Target 0 ``` to rollback all the migrations.
-- Then deleted all the migrations.
-- Run ``` add-migration InitialDatabase ``` to create a new migration with all the database changes.
-- Run ``` update-database ```
 
 
 ## Version 1.0 attributes:
