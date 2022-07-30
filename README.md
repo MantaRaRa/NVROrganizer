@@ -21,7 +21,7 @@
 - Added a Section to create appointments that displays a Calendar and PickList
 
 - Modern dark design (Mahapps.Metro for Styling)
-- 
+
 *Find File :namespace NvrOrganizer.UI.Wrapper.App.xaml in the Solution Explorer, Line 14*
 ```  <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Dark.Crimson.xaml" /> ```
 
